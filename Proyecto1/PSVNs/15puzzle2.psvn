@@ -1,4 +1,4 @@
-#psvn para 15 puzzle con costo 1 en todos los movimientos.
+#psvn para 15 puzzle con costo 1 en movimientos horizontales y 2 en verticales.
 
 DOMAIN tile 16   # define a domain called "tile" cosisting of 16 constants
        b 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  # these are the constants (b is for the blank)
@@ -35,32 +35,32 @@ X b - - - - - - - - - - - - - - => b X - - - - - - - - - - - - - - LABEL RIGHT C
 - - - - - - - - - - - - - - b X => - - - - - - - - - - - - - - X b LABEL LEFT COST 1
 - - - - - - - - - - - - - - X b => - - - - - - - - - - - - - - b X LABEL RIGHT COST 1
 
-b - - - X - - - - - - - - - - - => X - - - b - - - - - - - - - - - LABEL UP COST 1
-X - - - b - - - - - - - - - - - => b - - - X - - - - - - - - - - - LABEL DOWN COST 1
-- - - - b - - - X - - - - - - - => - - - - X - - - b - - - - - - - LABEL UP COST 1
-- - - - X - - - b - - - - - - - => - - - - b - - - X - - - - - - - LABEL DOWN COST 1
-- - - - - - - - b - - - X - - - => - - - - - - - - X - - - b - - - LABEL UP COST 1
-- - - - - - - - X - - - b - - - => - - - - - - - - b - - - X - - - LABEL DOWN COST 1
+b - - - X - - - - - - - - - - - => X - - - b - - - - - - - - - - - LABEL UP COST 2
+X - - - b - - - - - - - - - - - => b - - - X - - - - - - - - - - - LABEL DOWN COST 2
+- - - - b - - - X - - - - - - - => - - - - X - - - b - - - - - - - LABEL UP COST 2
+- - - - X - - - b - - - - - - - => - - - - b - - - X - - - - - - - LABEL DOWN COST 2
+- - - - - - - - b - - - X - - - => - - - - - - - - X - - - b - - - LABEL UP COST 2
+- - - - - - - - X - - - b - - - => - - - - - - - - b - - - X - - - LABEL DOWN COST 2
 
-- b - - - X - - - - - - - - - - => - X - - - b - - - - - - - - - - LABEL UP COST 1
-- X - - - b - - - - - - - - - - => - b - - - X - - - - - - - - - - LABEL DOWN COST 1
-- - - - - b - - - X - - - - - - => - - - - - X - - - b - - - - - - LABEL UP COST 1
-- - - - - X - - - b - - - - - - => - - - - - b - - - X - - - - - - LABEL DOWN COST 1
-- - - - - - - - - b - - - X - - => - - - - - - - - - X - - - b - - LABEL UP COST 1
-- - - - - - - - - X - - - b - - => - - - - - - - - - b - - - X - - LABEL DOWN COST 1
+- b - - - X - - - - - - - - - - => - X - - - b - - - - - - - - - - LABEL UP COST 2
+- X - - - b - - - - - - - - - - => - b - - - X - - - - - - - - - - LABEL DOWN COST 2
+- - - - - b - - - X - - - - - - => - - - - - X - - - b - - - - - - LABEL UP COST 2
+- - - - - X - - - b - - - - - - => - - - - - b - - - X - - - - - - LABEL DOWN COST 2
+- - - - - - - - - b - - - X - - => - - - - - - - - - X - - - b - - LABEL UP COST 2
+- - - - - - - - - X - - - b - - => - - - - - - - - - b - - - X - - LABEL DOWN COST 2
 
-- - b - - - X - - - - - - - - - => - - X - - - b - - - - - - - - - LABEL UP COST 1
-- - X - - - b - - - - - - - - - => - - b - - - X - - - - - - - - - LABEL DOWN COST 1
-- - - - - - b - - - X - - - - - => - - - - - - X - - - b - - - - - LABEL UP COST 1
-- - - - - - X - - - b - - - - - => - - - - - - b - - - X - - - - - LABEL DOWN COST 1
-- - - - - - - - - - b - - - X - => - - - - - - - - - - X - - - b - LABEL UP COST 1
-- - - - - - - - - - X - - - b - => - - - - - - - - - - b - - - X - LABEL DOWN COST 1
+- - b - - - X - - - - - - - - - => - - X - - - b - - - - - - - - - LABEL UP COST 2
+- - X - - - b - - - - - - - - - => - - b - - - X - - - - - - - - - LABEL DOWN COST 2
+- - - - - - b - - - X - - - - - => - - - - - - X - - - b - - - - - LABEL UP COST 2
+- - - - - - X - - - b - - - - - => - - - - - - b - - - X - - - - - LABEL DOWN COST 2
+- - - - - - - - - - b - - - X - => - - - - - - - - - - X - - - b - LABEL UP COST 2
+- - - - - - - - - - X - - - b - => - - - - - - - - - - b - - - X - LABEL DOWN COST 2
 
-- - - b - - - X - - - - - - - - => - - - X - - - b - - - - - - - - LABEL UP COST 1
-- - - X - - - b - - - - - - - - => - - - b - - - X - - - - - - - - LABEL DOWN COST 1
-- - - - - - - b - - - X - - - - => - - - - - - - X - - - b - - - - LABEL UP COST 1
-- - - - - - - X - - - b - - - - => - - - - - - - b - - - X - - - - LABEL DOWN COST 1
-- - - - - - - - - - - b - - - X => - - - - - - - - - - - X - - - b LABEL UP COST 1
-- - - - - - - - - - - X - - - b => - - - - - - - - - - - b - - - X LABEL DOWN COST 1
+- - - b - - - X - - - - - - - - => - - - X - - - b - - - - - - - - LABEL UP COST 2
+- - - X - - - b - - - - - - - - => - - - b - - - X - - - - - - - - LABEL DOWN COST 2
+- - - - - - - b - - - X - - - - => - - - - - - - X - - - b - - - - LABEL UP COST 2
+- - - - - - - X - - - b - - - - => - - - - - - - b - - - X - - - - LABEL DOWN COST 2
+- - - - - - - - - - - b - - - X => - - - - - - - - - - - X - - - b LABEL UP COST 2
+- - - - - - - - - - - X - - - b => - - - - - - - - - - - b - - - X LABEL DOWN COST 2
 
 GOAL b 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
