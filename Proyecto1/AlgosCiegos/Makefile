@@ -1,7 +1,7 @@
 CC = gcc
 CXX = clang++
 OPT = -g -Wall -O3 -Wno-unused-function -Wno-unused-variable
-PSVNOPT = --no_state_map --no_abstraction --no_backwards_moves --history_len=0
+PSVNOPT = --no_state_map --no_abstraction --no_backwards_moves --history_len=2
 
 psvn2c_core.c:
 	cp ../psvn2c_core.c ./psvn2c_core.c
@@ -21,6 +21,9 @@ psvn2c_abstraction.c:
 %.DFID: %.c DFID.cpp
 	$(CXX) $(OPT) DFID.cpp -include $< -o $@
 
+%.bfsDDD: %.c bfsDDD.cpp
+	$(CXX) $(OPT) bfsDDD.cpp -include $< -o $@
+
 .PHONY : clean
 clean:
-	rm -f *.succ *.o sliding_tile1x3.c psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c *~
+	rm -f *.succ *.o 8puzzle.c 15puzzle1.c psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c *~
