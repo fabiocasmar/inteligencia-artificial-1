@@ -16,9 +16,8 @@ struct orden{
 
 void ucsDDD(state_t state){
 	priority_queue<par,vector<par >, orden> q;
-	int ruleid ;
+	int ruleid, costo;
     ruleid_iterator_t iter; 
-    int  costo;
 	state_map_t *mapa = new_state_map();
 
 	q.push(make_pair(state,0));
@@ -44,9 +43,7 @@ void ucsDDD(state_t state){
 			}
 	    }
 	}
-
 	cout << "No hay camino hasta el goal \n";
-
 }
 
 int main(){
