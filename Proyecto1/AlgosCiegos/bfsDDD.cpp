@@ -12,7 +12,6 @@ void bfsDDD(state_t state){
     int hist, child_hist;
 	hist = init_history;
 
-
 	q.push(state);
 
 	while (!(q.empty())) {
