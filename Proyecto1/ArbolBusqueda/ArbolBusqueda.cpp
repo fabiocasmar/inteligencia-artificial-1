@@ -13,14 +13,14 @@ int dfid_visita(state_t,int,int);
 void dfid(state_t raiz){
 	int p;
 	int cota = 0;
-
+	cout.precision(15);
 	while ( true ){
 		dfid_visita(raiz,cota,0);
-		cota = cota + 1;
-		if(cota>1){
+		if(cota>0){
 			cout << niveles[cota]/niveles[cota-1]<< endl;
 		}
 		cout << cota << " \t\t\t" << niveles[cota] << " \t\t\t";
+		cota = cota + 1;
 	}
 }
 
@@ -31,7 +31,7 @@ int dfid_visita(state_t e, int cota, int nivel){
     state_t hijo;
     int p;
 
-	if (nivel > cota){
+	if (nivel >= cota){
 		niveles[nivel]=niveles[nivel]+1.0;
 		return nivel;
 	}
