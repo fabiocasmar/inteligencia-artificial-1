@@ -21,6 +21,9 @@ psvn2c_abstraction.c:
 %.ArbolBusqueda: %.c ArbolBusqueda.cpp
 	$(CXX) $(OPT) ArbolBusqueda.cpp -include $< -o $@
 
+%.ArbolBusqPodado: %.c ArbolBusqPodado.cpp
+	$(CXX) $(OPT) ArbolBusqPodado.cpp -include $< -o $@
+
 .PHONY : clean
 clean:
 	rm -f *.succ *.o sliding_tile1x3.c psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c *~
