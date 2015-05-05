@@ -2,63 +2,62 @@
 #include <string>
 #include <sstream>
 #include <queue>
+#include <unordered_map>
 
 using namespace std;
 
-class nodo{
-	public :
-	state_t puntero; 
-	nodo* padre; 
-	int costo;
+// class nodo{
+// 	public :
+// 	state_t; 
+// 	nodo* padre; 
+// 	int costo;
 
-	nodo(state_t x,nodo* y,int c){
-		puntero = x;
-		padre = y;
-		costo = c;
-	}
+// 	nodo(state_t x,nodo* y,int c){
+// 		// cout << print_state(stdout,y) << endl;
+// 	 = x;
+// 		if (y == NULL){
+// 			padre = NULL;
+// 		}
+// 		else {
+// 			*padre = *y;
+// 		}
+// 		costo = c;
+// 	}
 
-};
+// };
 
-nodo bfsDDD(state_t state){
-	queue<nodo> q;
+state_t bfsDDD(state_t state){
+	queue<state_t> q;
 	int ruleid ;
     ruleid_iterator_t iter; 
     state_map_t *mapa = new_state_map();
-    nodo* nodoRaiz = new nodo(state,NULL,1);
-	q.push(*nodoRaiz);
+	q.push(state);
 
 	while (!(q.empty())) {
 	    state_t hijo;
-		nodo aux = q.front();
+		state_t aux = q.front();
 		q.pop();
 
-		if (is_goal(&aux.puntero)){
+		if (is_goal(&aux)){
 			cout << "Llegamos al goal! \n";
 			return aux;
 		}
-		init_fwd_iter( &iter, &aux.puntero );
+
+		init_fwd_iter( &iter, &aux );
 	    while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
-	        apply_fwd_rule(ruleid, &aux.puntero, &hijo);
+	        apply_fwd_rule(ruleid, &aux, &hijo);
 	       	const int *visitado = state_map_get(mapa, &hijo );
 	       	if (visitado == NULL){
-	       		nodo* nodoAux = new nodo(hijo,&aux,1);
 	       		state_map_add(mapa, &hijo, 1);
-	       		q.push(*nodoAux);
+	       		q.push(hijo);
 	       	}
 	    }
-	    state_map_add(mapa,&aux.puntero,2);
+	    state_map_add(mapa,&aux,2);
 	}
 
 	cout << "No hay camino hasta el goal \n";
 }
 
-void imprimirCamino(nodo n){
-	if (&n == NULL){
-		return;
-	}
-	cout << print_state(stdout,&n.puntero) << endl;
-	imprimirCamino(*n.padre);
-}
 
 int main(){
 	char estadoIni[999];
@@ -74,9 +73,5 @@ int main(){
 		return 0; 
     }
 
-    nodo salida = bfsDDD(raiz);
-    cout << print_state(stdout,&salida.puntero) << endl;
-    cout << print_state(stdout,&salida.padre->puntero) << endl;
-    cout << print_state(stdout,&salida.padre->padre->puntero) << endl;
-    // imprimirCamino(salida);
+    state_t salida = bfsDDD(raiz);
 }
