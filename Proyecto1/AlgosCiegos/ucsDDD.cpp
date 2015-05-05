@@ -5,10 +5,21 @@
 #include <vector>
 using namespace std;
 
-struct nodo{
-  state_t puntero; 
-  state_t padre; 
-   int costo; 
+class nodo{
+	public:
+		state_t puntero;
+		state_t padre;
+		int costo;
+		nodo();
+		nodo(state_t x, state_t y, int z);
+};
+
+nodo::nodo(state_t x, state_t y, int z){
+		puntero = x; 
+		padre = y;
+		costo =z;
+};
+nodo::nodo(){
 };
 
 struct orden{
@@ -24,11 +35,12 @@ void ucsDDD(state_t state){
     ruleid_iterator_t iter; 
 	state_map_t *mapa = new_state_map();
 
-	q.push(make_pair(state,0));
+	q.push(*(new nodo(state,state,0)));
 
 	while (!(q.empty())) {
 	    state_t hijo;
-		pair<state_t, int> aux = q.top();
+		nodo aux;
+		aux = q.top();
 		q.pop();
 
 		if (is_goal(&aux.puntero)){
@@ -43,7 +55,7 @@ void ucsDDD(state_t state){
 	    	const int *viejo_costo = state_map_get(mapa, &hijo );
             if (viejo_costo == NULL || *viejo_costo > costo ) {
 				state_map_add(mapa, &hijo, costo);
-				q.push(make_pair(hijo,costo));
+				q.push(*(new nodo(hijo,aux.puntero,costo)));
 			}
 	    }
 	}
