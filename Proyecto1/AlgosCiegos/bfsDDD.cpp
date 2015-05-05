@@ -9,31 +9,30 @@ void bfsDDD(state_t state){
 	queue<state_t> q;
 	int ruleid ;
     ruleid_iterator_t iter; 
-    int hist, child_hist;
-	hist = init_history;
+    state_map_t *mapa = new_state_map();
 
 	q.push(state);
 
 	while (!(q.empty())) {
-	    state_t child;
+	    state_t hijo;
 		state_t aux = q.front();
 		q.pop();
+
 
 		if (is_goal(&aux)){
 			cout << "Llegamos al goal! \n";
 			return;
 		}
-
 		init_fwd_iter( &iter, &aux );
 	    while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
-			if (!(fwd_rule_valid_for_history(hist,ruleid))){
-	    		cout << "Estoy eliminando un hijo de : " << print_state(stdout,&aux) << " " << endl;
-				continue;
-			}
-			child_hist = next_fwd_history(hist,ruleid);
-			apply_fwd_rule( ruleid, &aux, &child );
-			q.push(child);
+	        apply_fwd_rule(ruleid, &aux, &hijo);
+	       	const int *visitado = state_map_get(mapa, &hijo );
+	       	if (visitado == NULL){
+	       		state_map_add(mapa, &hijo, 1);
+	       		q.push(hijo);
+	       	}
 	    }
+	    state_map_add(mapa,&aux,2);
 	}
 
 	cout << "No hay camino hasta el goal \n";
