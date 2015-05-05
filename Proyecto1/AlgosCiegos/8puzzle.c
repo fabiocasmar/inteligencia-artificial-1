@@ -1016,6 +1016,7 @@ static uint64_t hash_state( const state_t *state )
 Copyright (C) 2011, 2014 by the PSVN Research Group, University of Alberta
 */
 
+
 typedef struct {
   state_t state;
   int value;

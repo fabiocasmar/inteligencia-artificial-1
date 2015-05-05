@@ -2,29 +2,28 @@
 #include <string>
 #include <sstream>
 #include <queue>
-#include <unordered_map>
+#include <tr1/unordered_map>
 
 using namespace std;
 
-// class nodo{
-// 	public :
-// 	state_t; 
-// 	nodo* padre; 
-// 	int costo;
+class nodo{
+	public :
+	state_t puntero;
+	nodo* padre; 
+	int costo;
 
-// 	nodo(state_t x,nodo* y,int c){
-// 		// cout << print_state(stdout,y) << endl;
-// 	 = x;
-// 		if (y == NULL){
-// 			padre = NULL;
-// 		}
-// 		else {
-// 			*padre = *y;
-// 		}
-// 		costo = c;
-// 	}
+	nodo(state_t x,nodo* y,int c){
+	    puntero = x;
+		if (y == NULL){
+			padre = NULL;
+		}
+		else {
+			padre = y;
+		}
+		costo = c;
+	}
 
-// };
+};
 
 state_t bfsDDD(state_t state){
 	queue<state_t> q;
@@ -38,14 +37,14 @@ state_t bfsDDD(state_t state){
 		state_t aux = q.front();
 		q.pop();
 
-		if (is_goal(&aux)){
+		if (is_goal(&aux.puntero)){
 			cout << "Llegamos al goal! \n";
 			return aux;
 		}
 
 		init_fwd_iter( &iter, &aux );
 	    while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
-	        apply_fwd_rule(ruleid, &aux, &hijo);
+	        apply_fwd_rule(ruleid, &aux.puntero, &hijo);
 	       	const int *visitado = state_map_get(mapa, &hijo );
 	       	if (visitado == NULL){
 	       		state_map_add(mapa, &hijo, 1);
