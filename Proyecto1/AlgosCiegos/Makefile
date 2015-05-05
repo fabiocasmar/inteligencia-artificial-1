@@ -1,4 +1,4 @@
-CC = gcc
+CC = clang++ -c 
 CXX = clang++
 OPT = -g -Wall -O3 -Wno-unused-function -Wno-unused-variable
 PSVNOPT = --state_map --no_abstraction --no_backwards_moves --history_len=3
@@ -18,14 +18,20 @@ psvn2c_abstraction.c:
 
 .PRECIOUS: %.c
 
+%.nodo: %.c nodo.hpp nodo.cpp 
+	$(CC) $(OPT) nodo.cpp -include $< 
+
+%.heucs: %.c ucsDDD.cpp 
+	$(CC) $(OPT) ucsDDD.cpp -include $< 
+
 %.DFID: %.c DFID.cpp
 	$(CXX) $(OPT) DFID.cpp -include $< -o $@
 
 %.bfsDDD: %.c bfsDDD.cpp
 	$(CXX) $(OPT) bfsDDD.cpp -include $< -o $@
 
-%.ucsDDD: %.c ucsDDD.cpp
-	$(CXX) $(OPT) ucsDDD.cpp -include $< -o $@
+%.ucsDDD: %.c %.nodo %.heucs
+	$(CXX) $(OPT) nodo.o ucsDDD.o -include $< -o $@
 
 .PHONY : clean
 clean:
