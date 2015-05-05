@@ -5,38 +5,59 @@
 
 using namespace std;
 
-void bfsDDD(state_t state){
-	queue<state_t> q;
+class nodo{
+	public :
+	state_t puntero; 
+	nodo* padre; 
+	int costo;
+
+	nodo(state_t x,nodo* y,int c){
+		puntero = x;
+		padre = y;
+		costo = c;
+	}
+
+};
+
+nodo bfsDDD(state_t state){
+	queue<nodo> q;
 	int ruleid ;
     ruleid_iterator_t iter; 
     state_map_t *mapa = new_state_map();
-
-	q.push(state);
+    nodo* nodoRaiz = new nodo(state,NULL,1);
+	q.push(*nodoRaiz);
 
 	while (!(q.empty())) {
 	    state_t hijo;
-		state_t aux = q.front();
+		nodo aux = q.front();
 		q.pop();
 
-
-		if (is_goal(&aux)){
+		if (is_goal(&aux.puntero)){
 			cout << "Llegamos al goal! \n";
-			return;
+			return aux;
 		}
-		init_fwd_iter( &iter, &aux );
+		init_fwd_iter( &iter, &aux.puntero );
 	    while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
-	        apply_fwd_rule(ruleid, &aux, &hijo);
+	        apply_fwd_rule(ruleid, &aux.puntero, &hijo);
 	       	const int *visitado = state_map_get(mapa, &hijo );
 	       	if (visitado == NULL){
+	       		nodo* nodoAux = new nodo(hijo,&aux,1);
 	       		state_map_add(mapa, &hijo, 1);
-	       		q.push(hijo);
+	       		q.push(*nodoAux);
 	       	}
 	    }
-	    state_map_add(mapa,&aux,2);
+	    state_map_add(mapa,&aux.puntero,2);
 	}
 
 	cout << "No hay camino hasta el goal \n";
+}
 
+void imprimirCamino(nodo n){
+	if (&n == NULL){
+		return;
+	}
+	cout << print_state(stdout,&n.puntero) << endl;
+	imprimirCamino(*n.padre);
 }
 
 int main(){
@@ -53,5 +74,9 @@ int main(){
 		return 0; 
     }
 
-    bfsDDD(raiz);
+    nodo salida = bfsDDD(raiz);
+    cout << print_state(stdout,&salida.puntero) << endl;
+    cout << print_state(stdout,&salida.padre->puntero) << endl;
+    cout << print_state(stdout,&salida.padre->padre->puntero) << endl;
+    // imprimirCamino(salida);
 }
