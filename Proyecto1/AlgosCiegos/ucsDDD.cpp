@@ -5,17 +5,21 @@
 #include <vector>
 using namespace std;
 
-typedef pair < state_t,int > par;
+struct nodo{
+  state_t puntero; 
+  state_t padre; 
+   int costo; 
+};
 
 struct orden{
-    bool operator()(par const& a, par const& b) const
+    bool operator()(nodo const& a, nodo const& b) const
     {
-        return a.second > b.second;
+        return a.costo > b.costo;
     }
 };
 
 void ucsDDD(state_t state){
-	priority_queue<par,vector<par >, orden> q;
+	priority_queue<nodo,vector<nodo >, orden> q;
 	int ruleid, costo;
     ruleid_iterator_t iter; 
 	state_map_t *mapa = new_state_map();
@@ -27,15 +31,15 @@ void ucsDDD(state_t state){
 		pair<state_t, int> aux = q.top();
 		q.pop();
 
-		if (is_goal(&aux.first)){
+		if (is_goal(&aux.puntero)){
 			cout << "Llegamos al goal! \n";
 			return;
 		}
 
-		init_fwd_iter( &iter, &aux.first );
+		init_fwd_iter( &iter, &aux.puntero );
 	    while(( ruleid = next_ruleid( &iter ) ) >= 0 ) {
-	    	const int costo = aux.second+get_fwd_rule_cost(ruleid);
-	    	apply_fwd_rule(ruleid, &aux.first, &hijo);
+	    	const int costo = aux.costo+get_fwd_rule_cost(ruleid);
+	    	apply_fwd_rule(ruleid, &aux.puntero, &hijo);
 	    	const int *viejo_costo = state_map_get(mapa, &hijo );
             if (viejo_costo == NULL || *viejo_costo > costo ) {
 				state_map_add(mapa, &hijo, costo);
