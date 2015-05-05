@@ -17,13 +17,14 @@ int dfid_visita(state_t,int,int,state_t);
 void dfid(state_t raiz){
 	int cota = 0;
 
+	cout.precision(15);
 	while ( true ){
-		dfid_visita(raiz,cota,0,raiz);
-		cota = cota + 1;
-		if(cota>1){
+		dfid_visita(raiz,cota,0);
+		if(cota>0){
 			cout << niveles[cota]/niveles[cota-1]<< endl;
 		}
 		cout << cota << " \t\t\t" << niveles[cota] << " \t\t\t";
+		cota = cota + 1;
 	}
 }
 
@@ -34,7 +35,7 @@ int dfid_visita(state_t e, int cota, int nivel, state_t ultEstado){
     state_t hijo;
     int p;
 
-	if (nivel > cota){
+	if (nivel >= cota){
 		niveles[nivel]=niveles[nivel]+1.0;
 		return nivel;
 	}
@@ -42,7 +43,6 @@ int dfid_visita(state_t e, int cota, int nivel, state_t ultEstado){
     while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
 		apply_fwd_rule( ruleid, &e, &hijo );
 		if (compare_states(&hijo,&ultEstado)==0) { // Si el estado que genero es igual al estado del que vengo lo ignoro
-//			cout << "Eliminado: " << print_state(stdout,&hijo) << endl;
 			continue;
 		}
 		p = dfid_visita(hijo,cota, nivel+1,e);
