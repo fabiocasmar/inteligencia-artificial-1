@@ -1,7 +1,7 @@
 CC = clang++ -c 
 CXX = clang++
 OPT = -g -Wall -O3 -Wno-unused-function -Wno-unused-variable
-PSVNOPT = --state_map --no_abstraction --no_backwards_moves --history_len=3
+PSVNOPT = --state_map --no_abstraction --no_backwards_moves --history_len=1
 
 psvn2c_core.c:
 	cp ../psvn2c_core.c ./psvn2c_core.c
