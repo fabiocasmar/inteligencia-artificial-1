@@ -24,11 +24,14 @@ psvn2c_abstraction.c:
 %.heucs: %.c ucsDDD.cpp 
 	$(CC) $(OPT) ucsDDD.cpp -include $< 
 
+%.hebfs: %.c bfsDDD.cpp 
+	$(CC) $(OPT) bfsDDD.cpp -include $< 
+
 %.DFID: %.c DFID.cpp
 	$(CXX) $(OPT) DFID.cpp -include $< -o $@
 
-%.bfsDDD: %.c bfsDDD.cpp
-	$(CXX) $(OPT) bfsDDD.cpp -include $< -o $@
+%.bfsDDD: %.c %.nodo %.hebfs
+	$(CXX) $(OPT) nodo.o bfsDDD.o -include $< -o $@
 
 %.ucsDDD: %.c %.nodo %.heucs
 	$(CXX) $(OPT) nodo.o ucsDDD.o -include $< -o $@
