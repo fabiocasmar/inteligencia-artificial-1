@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 nodo* bfsDDD(state_t state){
 	queue<nodo*> q;
 	int ruleid ;
