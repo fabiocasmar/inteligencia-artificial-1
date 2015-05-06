@@ -19,7 +19,7 @@ void dfid(state_t raiz){
 
 	cout.precision(15);
 	while ( true ){
-		dfid_visita(raiz,cota,0);
+		dfid_visita(raiz,cota,0,raiz);
 		if(cota>0){
 			cout << niveles[cota]/niveles[cota-1]<< endl;
 		}
