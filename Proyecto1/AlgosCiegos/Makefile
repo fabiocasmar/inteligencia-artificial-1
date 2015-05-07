@@ -1,4 +1,4 @@
-CC = clang++ -c 
+CC = clang++ -c -Wc++11-extensions
 CXX = clang++
 OPT = -g -Wall -O3 -Wno-unused-function -Wno-unused-variable
 PSVNOPT = --state_map --no_abstraction --no_backwards_moves --history_len=0
@@ -27,6 +27,12 @@ psvn2c_abstraction.c:
 %.hebfs: %.c bfsDDD.cpp 
 	$(CC) $(OPT) bfsDDD.cpp -include $< 
 
+%.heaestrella: %.c aestrella.cpp
+	$(CC) $(OPT) aestrella.cpp -include $< 
+
+%.hidaestrella: %.c idaestrella.cpp
+	$(CC) $(OPT) idaestrella.cpp -include $< 
+
 %.DFID: %.c DFID.cpp
 	$(CXX) $(OPT) DFID.cpp -include $< -o $@
 
@@ -35,6 +41,12 @@ psvn2c_abstraction.c:
 
 %.ucsDDD: %.c %.nodo %.heucs
 	$(CXX) $(OPT) nodo.o ucsDDD.o -include $< -o $@
+
+%.aestrella: %.c %.nodo %.heaestrella
+	$(CXX) $(OPT) nodo.o aestrella.o -include $< -o $@
+
+%.idaestrella: %.c %.nodo %.hidaestrella
+	$(CXX) $(OPT) nodo.o idaestrella.o -include $< -o $@
 
 .PHONY : clean
 clean:

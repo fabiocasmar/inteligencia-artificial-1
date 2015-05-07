@@ -32,10 +32,10 @@ nodo* ucsDDD(state_t state){
 
 		init_fwd_iter( &iter, &aux->puntero);
 	    while(( ruleid = next_ruleid( &iter ) ) >= 0 ) {
-	    	const int costo = aux->costo+get_fwd_rule_cost(ruleid);
+	    	int costo = aux->costo + get_fwd_rule_cost(ruleid);
 	    	apply_fwd_rule(ruleid, &aux->puntero, &hijo);
-	    	const int *viejo_costo = state_map_get(mapa, &hijo);
-            if (viejo_costo == NULL || *viejo_costo > costo ) {
+	    	int viejo_costo = *(state_map_get(mapa, &hijo));
+            if (viejo_costo == NULL || viejo_costo > costo ) {
             	nodo *nodoAux = new nodo(hijo,aux,costo);
 				state_map_add(mapa, &hijo, costo);
 				q.push(nodoAux);
