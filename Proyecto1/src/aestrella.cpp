@@ -3,7 +3,8 @@
 #include <sstream>
 #include <queue>
 #include <vector>
-#include "nodo.hpp"
+#include "./extras/nodo.hpp"
+#include "manhattan.cpp"
 using namespace std;
 
 struct orden{
@@ -32,22 +33,23 @@ public:
     }
 };
 
-nodo* aestrella(state_t state, int (*funcion_g)(state_t)){
+nodo* aestrella(state_t state, int (*funcion_g)(state_t,int)){
 	NuestraPila q;
 	int ruleid, costo;
     ruleid_iterator_t iter; 
 	state_map_t *mapa_costo = new_state_map();
 	state_map_t *mapa_estado = new_state_map();
-	nodo* nodoRaiz = new nodo(state,NULL,1);
+	nodo* nodoRaiz = (nodo*)malloc(sizeof(nodo));
+	nodoRaiz = new nodo(state,NULL,1);
 	q.push(nodoRaiz);
-	state_map_add(mapa_costo, &state, 0);
-	state_map_add(mapa_estado, &state, 0);
+	state_map_add(mapa_costo, &state, 1);
+	state_map_add(mapa_estado, &state, 1);
 
 	while (!(q.empty())) {
 	    state_t hijo;
 		nodo* aux = q.top();
 		q.pop();
-		state_map_add(mapa_estado, &state, 0);
+		state_map_add(mapa_estado, &state, 2);
 
 		if (is_goal(&aux->puntero)){
 			cout << "Llegamos al goal! \n";
@@ -61,11 +63,12 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t)){
 	    	apply_fwd_rule(ruleid, &aux->puntero, &hijo);
 	    	int viejo_costo = *(state_map_get(mapa_costo, &hijo)); 
 	    	nodo *nodoAux = new nodo(hijo,aux,costo);
-	    	if(*state_map_get(mapa_estado, &hijo)==0)continue;
-            if ((viejo_costo > costo)||(*state_map_get(mapa_estado, &hijo)==1)){
-            	int estimado = costo+funcion_g(hijo);
+	    	int temp = *state_map_get(mapa_estado, &hijo);
+	    	if(temp==2)continue;
+            if ((viejo_costo > costo)||(temp!=1)){
+            	int estimado = costo+funcion_g(hijo,0);
             	state_map_add(mapa_costo, &hijo, costo);
-				if(state_map_get(mapa_estado, &hijo)==0){
+				if(temp==0){
 					state_map_add(mapa_estado, &hijo, 1);
 					q.push(nodoAux);
 				}else{
@@ -77,6 +80,7 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t)){
 	    }
 	}
 	cout << "No hay camino hasta el goal \n";
+	return NULL;
 }
 
 void imprimirCamino(nodo* n){
@@ -101,6 +105,7 @@ int main(){
 		return 0; 
     }
 
-    //nodo* salida = aestrella(raiz);
-    //imprimirCamino(salida);
+    
+    nodo* salida = aestrella(raiz,calcularManhattan);
+    imprimirCamino(salida);
 }

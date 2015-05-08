@@ -2,21 +2,21 @@
 #include <string>
 #include <sstream>
 #include <limits>
+#include "manhattan.cpp"
 
 using namespace std;
 
 const int MAXINT = std::numeric_limits<int>::max();
 
-int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t)){
+int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t, int)){
 	int ruleid ;	
 	int t = MAXINT;
     ruleid_iterator_t iter; 
     state_t hijo;
     int p;
-    int f = g + funcion_h(e);
+    int f = g + funcion_h(e,0);
 
-
-	if (f > g) 
+	if (f > cota) 
 		return f;
 
 	if (is_goal(&e)){
@@ -38,13 +38,13 @@ int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t)){
     return t;
 }
 
-void ida_estrella(state_t raiz, int (*funcion_h)(state_t)){
+void ida_estrella(state_t raiz, int (*funcion_h)(state_t,int)){
 	int p;
-	int cota = funcion_h(raiz);
+	int cota = funcion_h(raiz,0);
 	while ( true ){
 		p = busqueda(raiz,cota,0,funcion_h);
 		if(p == -1) break;
-		if(p==0) break;
+		if(p == 0) break;
 		cota = p;
 	}
 }
@@ -63,5 +63,5 @@ int main(){
 		return 0; 
     }
 
-    //ida_estrella(raiz);
+    ida_estrella(raiz,calcularManhattan);
 }

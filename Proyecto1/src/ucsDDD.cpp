@@ -3,7 +3,7 @@
 #include <sstream>
 #include <queue>
 #include <vector>
-#include "nodo.hpp"
+#include "./extras/nodo.hpp"
 using namespace std;
 
 struct orden{

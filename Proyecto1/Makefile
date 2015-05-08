@@ -9,3 +9,4 @@ psvn2c: psvn2c.cpp psvn2c.hpp psvn.cpp psvn.hpp
 
 clean:
 	rm -f psvn2c *.o *~
+

@@ -18,8 +18,8 @@ psvn2c_abstraction.c:
 
 .PRECIOUS: %.c
 
-%.nodo: %.c nodo.hpp nodo.cpp 
-	$(CC) $(OPT) nodo.cpp -include $< 
+%.nodo: %.c ./extras/nodo.hpp ./extras/nodo.cpp 
+	$(CC) $(OPT) ./extras/nodo.cpp -include $< 
 
 %.heucs: %.c ucsDDD.cpp 
 	$(CC) $(OPT) ucsDDD.cpp -include $< 
@@ -38,15 +38,20 @@ psvn2c_abstraction.c:
 
 %.bfsDDD: %.c %.nodo %.hebfs
 	$(CXX) $(OPT) nodo.o bfsDDD.o -include $< -o $@
+	rm nodo.o bfsDDD.o 
 
 %.ucsDDD: %.c %.nodo %.heucs
 	$(CXX) $(OPT) nodo.o ucsDDD.o -include $< -o $@
+	rm nodo.o ucsDDD.o
 
 %.aestrella: %.c %.nodo %.heaestrella
 	$(CXX) $(OPT) nodo.o aestrella.o -include $< -o $@
 
 %.idaestrella: %.c %.nodo %.hidaestrella
 	$(CXX) $(OPT) nodo.o idaestrella.o -include $< -o $@
+
+#%.manhattan: %.c manhattan.cpp
+#	$(CC) $(OPT) manhattan.cpp -include $< 
 
 .PHONY : clean
 clean:
