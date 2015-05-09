@@ -4,7 +4,7 @@
 #include <queue>
 #include <vector>
 #include "./extras/nodo.hpp"
-#include "manhattan.cpp"
+#include "./heuristicas/manhattan.cpp"
 using namespace std;
 
 struct orden{

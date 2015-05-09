@@ -2,8 +2,7 @@
 #include <string>
 #include <sstream>
 #include <queue>
-#include "nodo.hpp"
-
+#include "./extras/nodo.hpp"
 using namespace std;
 
 nodo* bfsDDD(state_t state){

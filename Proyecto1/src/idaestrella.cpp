@@ -2,8 +2,7 @@
 #include <string>
 #include <sstream>
 #include <limits>
-#include "manhattan.cpp"
-
+#include "./heuristicas/manhattan.cpp"
 using namespace std;
 
 const int MAXINT = std::numeric_limits<int>::max();
