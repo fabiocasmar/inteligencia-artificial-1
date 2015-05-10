@@ -54,9 +54,13 @@ int dfid_visita(state_t e, int cota,int costoAct){
     return t;
 }
 
-
-
 int main(int argc,char* argv[]){
+
+	if (argc < 2){
+   		std::cerr << "Error : Ingrese un archivo de entrada al ejecutar el programa \n";
+   		return 1;
+   	}
+
 	string arch = argv[1];
 	string linea;
 	char estadoIni[999];
@@ -64,29 +68,35 @@ int main(int argc,char* argv[]){
     state_t raiz;
 
 	ifstream myfile (argv[1]);
-	while (getline(myfile,linea)){
-		const char* c = linea.c_str();
-		totalNodos = 0;
-		niveles = 0;
-		struct timeval t;
-		gettimeofday(&t,NULL);
-		double t1 = t.tv_sec+(t.tv_usec/1000000.0);
+	if (myfile.is_open()){
+		while (getline(myfile,linea)){
+			const char* c = linea.c_str();
+			totalNodos = 0;
+			niveles = 0;
+			struct timeval t;
+			gettimeofday(&t,NULL);
+			double t1 = t.tv_sec+(t.tv_usec/1000000.0);
 
-		nchars = read_state(c,&raiz);
-	    if (nchars <= 0) {
-			cout << "Error: invalid state entered.\n";
-			return 0; 
+			nchars = read_state(c,&raiz);
+		    if (nchars <= 0) {
+				cout << "Error: invalid state entered.\n";
+				return 0; 
+		    }
+
+		    dfid(raiz);
+
+		    gettimeofday(&t,NULL);
+		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
+		    double segundos = t2-t1;
+
+		    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+	        cout << totalNodos/segundos << endl;
 	    }
-
-	    dfid(raiz);
-
-	    gettimeofday(&t,NULL);
-	    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
-	    double segundos = t2-t1;
-
-	    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
-        cout << totalNodos/segundos << endl;
-    }
+	}
+	else{
+		std::cerr << "Error : El archivo no existe \n";
+		return 1;
+	}
 
     return 0;
 }
