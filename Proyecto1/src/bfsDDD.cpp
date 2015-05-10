@@ -6,6 +6,7 @@
 using namespace std;
 
 nodo* bfsDDD(state_t state){
+	int totalNodos = 0;
 	queue<nodo*> q;
 	int ruleid ;
     ruleid_iterator_t iter; 
