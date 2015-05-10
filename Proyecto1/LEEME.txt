@@ -1,0 +1,27 @@
+Proyecto 1 de CI5437
+Hecho por: Fabio Castro
+		   María Victoria Jorge 11-10495
+		   Jorge Marcano 11-10566
+
+-> Instrucciones:
+	Para compilar cualquiera de los algoritmos debe hacerse make nombre_del_problema.algoritmo
+	Luego, se ejecuta haciendo ./nombre_del_problema.algoritmo archivo_entrada, donde el archivo
+	de entrada es el que contiene cada uno de los estados iniciales desde donde quieren empezarse
+	las corridas.
+
+-> El directorio src contiene los archivos correspondientes a todos los algoritmos de búsqueda,
+   la representación de la clase nodo utilizada en los algoritmos iterativos (se encuentra en
+   el directorio /src/extras) y la heurística Manhattan para los problemas de 15-puzzle y 24-puzzle
+   (en src/heuristicas).
+
+-> En el directorio problemas se guardan todos los archivos .c generados por psvn2c al momento de 
+   compilar alguno de los psvn existentes.
+
+-> En problemasPSVNs están los archivos PSVN de cada una de las versiones de los problemas a resolver.
+
+-> El directorio Salidas Arboles contiene las tablas para cada problema donde se reporta el número de 
+   estados visitados a cada profundidad en el árbol de búsqueda a partir del estado goal, hasta la 
+   profundidad alcanzada en 15 minutos de ejecución, y el factor de ramificación en cada nivel.
+   En Sin Podar se encuentran los reportes sin realizar ningún tipo de podado de duplicados y en
+   Podado Parcial están las tablas correspondientes a los recorridos utilizando podado de duplicados
+   de padres.
