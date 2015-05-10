@@ -3,10 +3,15 @@
 #include <sstream>
 #include <queue>
 #include "./extras/nodo.hpp"
+#include <sys/time.h>
+#include <fstream>
+
 using namespace std;
 
+int totalNodos = 0;
+int niveles = 0;
+
 nodo* bfsDDD(state_t state){
-	int totalNodos = 0;
 	queue<nodo*> q;
 	int ruleid ;
     ruleid_iterator_t iter; 
@@ -19,10 +24,12 @@ nodo* bfsDDD(state_t state){
 		nodo* aux = q.front();
 		q.pop();
 
+		totalNodos++;
+
 		if (is_goal(&aux->puntero)){
-			cout << "Llegamos al goal! \n";
 			return aux;
 		}
+
 		init_fwd_iter( &iter, &aux->puntero );
 	    while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
 	        apply_fwd_rule(ruleid, &aux->puntero, &hijo);
@@ -39,28 +46,58 @@ nodo* bfsDDD(state_t state){
 	cout << "No hay camino hasta el goal \n";
 }
 
-void imprimirCamino(nodo* n){
+void calcularNiveles(nodo* n){
 	if (n == NULL){
 		return;
 	}
-	cout << print_state(stdout,&n->puntero) << endl;
-	imprimirCamino(n->padre);
+	// cout << print_state(stdout,&n->puntero) << endl;
+	niveles++;
+	calcularNiveles(n->padre);
 }
 
-int main(){
-	char estadoIni[999];
+int main(int argc,char* argv[]){
+
+	if (argc < 2){
+   		std::cerr << "Error : Ingrese un archivo de entrada al ejecutar el programa \n";
+   		return 1;
+   	}
+
+	string linea;
     ssize_t nchars;
     state_t raiz;
 
-	cout << "Introduzca un estado y presione ENTER : " << endl;
-	cin.getline(estadoIni,999,'\n');
-	
-	nchars = read_state(estadoIni,&raiz);
-    if (nchars <= 0) {
-		cout << "Error: El estado introducido es invalido " << endl;
-		return 0; 
-    }
+    ifstream myfile (argv[1]);
 
-    nodo* salida = bfsDDD(raiz);
-    imprimirCamino(salida);
+    if (myfile.is_open()){
+		while (getline(myfile,linea)){
+			const char* c = linea.c_str();
+		    totalNodos = 0;
+			niveles = 0;
+
+			struct timeval t;
+			gettimeofday(&t,NULL);
+			double t1 = t.tv_sec+(t.tv_usec/1000000.0);
+
+			nchars = read_state(c,&raiz);
+		    if (nchars <= 0) {
+				cout << "Error: El estado introducido es invalido " << endl;
+				return 1; 
+		    }
+
+		    nodo* salida = bfsDDD(raiz);
+		    calcularNiveles(salida);
+
+		    gettimeofday(&t,NULL);
+		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
+		    double segundos = t2-t1;
+
+		    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+	        cout << totalNodos/segundos << endl;
+
+		}
+	}
+	else{
+		std::cerr << "Error : El archivo no existe \n";
+		return 1;
+	}
 }
