@@ -62,9 +62,7 @@ int main(int argc,char* argv[]){
    		return 1;
    	}
 
-	string arch = argv[1];
 	string linea;
-	char estadoIni[999];
     ssize_t nchars;
     state_t raiz;
 
@@ -83,7 +81,7 @@ int main(int argc,char* argv[]){
 			nchars = read_state(c,&raiz);
 		    if (nchars <= 0) {
 				cout << "Error: El estado introducido es invalido " << endl;
-				return 0; 
+				return 1; 
 		    }
 
 		    nodo* salida = bfsDDD(raiz);
