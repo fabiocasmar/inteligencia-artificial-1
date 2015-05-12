@@ -3,9 +3,14 @@
 #include <sstream>
 #include <limits>
 #include "./heuristicas/manhattan.cpp"
+#include <sys/time.h>
+#include <fstream>
+
 using namespace std;
 
 const int MAXINT = std::numeric_limits<int>::max();
+int niveles = 0;
+int totalNodos = 0;
 
 int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t, int)){
 	int ruleid ;	
@@ -48,19 +53,49 @@ void ida_estrella(state_t raiz, int (*funcion_h)(state_t,int)){
 	}
 }
 
-int main(){
-	char estadoIni[999];
+int main(int argc,char* argv[]){
+
+	if (argc < 2){
+   		std::cerr << "Error : Ingrese un archivo de entrada al ejecutar el programa \n";
+   		return 1;
+   	}
+
+	string linea;
     ssize_t nchars;
     state_t raiz;
 
-	cout << "Please enter a state followed by ENTER: \n";
-	cin.getline(estadoIni,999,'\n');
-	
-	nchars = read_state(estadoIni,&raiz);
-    if (nchars <= 0) {
-		cout << "Error: invalid state entered.\n";
-		return 0; 
-    }
 
-    ida_estrella(raiz,calcularManhattan);
+	ifstream myfile (argv[1]);
+
+	if (myfile.is_open()){
+		while (getline(myfile,linea)){
+
+			const char* c = linea.c_str();
+		    totalNodos = 0;
+			niveles = 0;
+
+			struct timeval t;
+			gettimeofday(&t,NULL);
+			double t1 = t.tv_sec+(t.tv_usec/1000000.0);
+			
+			nchars = read_state(c,&raiz);
+		    if (nchars <= 0) {
+				cout << "Error: invalid state entered.\n";
+				return 0; 
+		    }
+
+		    ida_estrella(raiz,calcularManhattan);
+
+		    gettimeofday(&t,NULL);
+		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
+		    double segundos = t2-t1;
+
+		    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+	        cout << totalNodos/segundos << endl;
+		}
+	}
+	else{
+		std::cerr << "Error : El archivo no existe \n";
+		return 1;
+	}
 }

@@ -5,7 +5,13 @@
 #include <vector>
 #include "./extras/nodo.hpp"
 #include "./heuristicas/manhattan.cpp"
+#include <sys/time.h>
+#include <fstream>
+
 using namespace std;
+
+int totalNodos = 0;
+int niveles = 0;
 
 struct orden{
     bool operator()(nodo *a, nodo *b){
@@ -40,7 +46,7 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t,int)){
 	state_map_t *mapa_costo = new_state_map();
 	state_map_t *mapa_estado = new_state_map();
 	nodo* nodoRaiz = (nodo*)malloc(sizeof(nodo));
-	nodoRaiz = new nodo(state,NULL,1);
+	nodoRaiz = new nodo(state,NULL,1,0);
 	q.push(nodoRaiz);
 	state_map_add(mapa_costo, &state, 1);
 	state_map_add(mapa_estado, &state, 1);
@@ -52,7 +58,6 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t,int)){
 		state_map_add(mapa_estado, &state, 2);
 
 		if (is_goal(&aux->puntero)){
-			cout << "Llegamos al goal! \n";
 			return aux;
 		}
 
@@ -62,7 +67,7 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t,int)){
 	    											+get_fwd_rule_cost(ruleid);
 	    	apply_fwd_rule(ruleid, &aux->puntero, &hijo);
 	    	int viejo_costo = *(state_map_get(mapa_costo, &hijo)); 
-	    	nodo *nodoAux = new nodo(hijo,aux,costo);
+	    	nodo *nodoAux = new nodo(hijo,aux,costo,ruleid);
 	    	int temp = *state_map_get(mapa_estado, &hijo);
 	    	if(temp==2)continue;
             if ((viejo_costo > costo)||(temp!=1)){
@@ -70,6 +75,7 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t,int)){
             	state_map_add(mapa_costo, &hijo, costo);
 				if(temp==0){
 					state_map_add(mapa_estado, &hijo, 1);
+					totalNodos++;
 					q.push(nodoAux);
 				}else{
 					nodoAux = q.find(hijo);
@@ -83,29 +89,66 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t,int)){
 	return NULL;
 }
 
-void imprimirCamino(nodo* n){
+// void imprimirCamino(nodo* n){
+// 	if (n == NULL){
+// 		return;
+// 	}
+// 	cout << print_state(stdout,&n->puntero) << endl;
+// 	imprimirCamino(n->padre);
+// }
+
+void calcularNiveles(nodo* n){
 	if (n == NULL){
 		return;
 	}
-	cout << print_state(stdout,&n->puntero) << endl;
-	imprimirCamino(n->padre);
+	niveles++;
+	calcularNiveles(n->padre);
 }
 
-int main(){
-	char estadoIni[999];
+int main(int argc,char* argv[]){
+
+	if (argc < 2){
+   		std::cerr << "Error : Ingrese un archivo de entrada al ejecutar el programa \n";
+   		return 1;
+   	}
+
+   	string linea;
     ssize_t nchars;
     state_t raiz;
 
-	cout << "Introduzca un estado y presione ENTER : " << endl;
-	cin.getline(estadoIni,999,'\n');
-	
-	nchars = read_state(estadoIni,&raiz);
-    if (nchars <= 0) {
-		cout << "Error: El estado introducido es invalido " << endl;
-		return 0; 
-    }
+    ifstream myfile (argv[1]);
+
+	if (myfile.is_open()){
+		while (getline(myfile,linea)){
+			const char* c = linea.c_str();
+		    totalNodos = 0;
+			niveles = 0;
+
+			struct timeval t;
+			gettimeofday(&t,NULL);
+			double t1 = t.tv_sec+(t.tv_usec/1000000.0);
+			
+			nchars = read_state(c,&raiz);
+		    if (nchars <= 0) {
+				cout << "Error: El estado introducido es invalido " << endl;
+				return 1; 
+		    }
+
+		    nodo* salida = aestrella(raiz,calcularManhattan);
+		    calcularNiveles(salida);
+		    
+		    gettimeofday(&t,NULL);
+		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
+		    double segundos = t2-t1;
+
+		    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+	        cout << totalNodos/segundos << endl;
+		}
+	}
+	else{
+		std::cerr << "Error : El archivo no existe \n";
+		return 1;
+	}
 
     
-    nodo* salida = aestrella(raiz,calcularManhattan);
-    imprimirCamino(salida);
 }

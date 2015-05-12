@@ -23,15 +23,13 @@ nodo* ucsDDD(state_t state){
 	int ruleid, costo;
     ruleid_iterator_t iter; 
 	state_map_t *mapa = new_state_map();
-	nodo* nodoRaiz = new nodo(state,NULL,1);
+	nodo* nodoRaiz = new nodo(state,NULL,1,0);
 	q.push(nodoRaiz);
 
 	while (!(q.empty())) {
 	    state_t hijo;
 		nodo* aux = q.top();
 		q.pop();
-
-		totalNodos++;
 		
 		if (is_goal(&aux->puntero)){
 			return aux;
@@ -43,8 +41,9 @@ nodo* ucsDDD(state_t state){
 	    	apply_fwd_rule(ruleid, &aux->puntero, &hijo);
 	    	int viejo_costo = *(state_map_get(mapa, &hijo));
             if (viejo_costo == NULL || viejo_costo > costo ) {
-            	nodo *nodoAux = new nodo(hijo,aux,costo);
+            	nodo *nodoAux = new nodo(hijo,aux,costo,ruleid);
 				state_map_add(mapa, &hijo, costo);
+				totalNodos++;
 				q.push(nodoAux);
 			}
 	    }

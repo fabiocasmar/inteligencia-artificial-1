@@ -71,6 +71,7 @@ int main(int argc,char* argv[]){
 			const char* c = linea.c_str();
 			totalNodos = 0;
 			niveles = 0;
+			
 			struct timeval t;
 			gettimeofday(&t,NULL);
 			double t1 = t.tv_sec+(t.tv_usec/1000000.0);

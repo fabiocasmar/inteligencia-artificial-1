@@ -16,15 +16,13 @@ nodo* bfsDDD(state_t state){
 	int ruleid ;
     ruleid_iterator_t iter; 
     state_map_t *mapa = new_state_map();
-    nodo* nodoRaiz = new nodo(state,NULL,1);
+    nodo* nodoRaiz = new nodo(state,NULL,1,0);
 	q.push(nodoRaiz);
 
 	while (!(q.empty())) {
 	    state_t hijo;
 		nodo* aux = q.front();
 		q.pop();
-
-		totalNodos++;
 
 		if (is_goal(&aux->puntero)){
 			return aux;
@@ -35,8 +33,9 @@ nodo* bfsDDD(state_t state){
 	        apply_fwd_rule(ruleid, &aux->puntero, &hijo);
 	       	const int *visitado = state_map_get(mapa, &hijo );
 	       	if (visitado == NULL){
-	       		nodo *nodoAux = new nodo(hijo,aux,1);
+	       		nodo *nodoAux = new nodo(hijo,aux,1,ruleid);
 	       		state_map_add(mapa, &hijo, 1);
+	       		totalNodos++;
 	       		q.push(nodoAux);
 	       	}
 	    }
