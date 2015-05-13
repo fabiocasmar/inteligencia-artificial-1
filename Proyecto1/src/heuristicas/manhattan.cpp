@@ -67,7 +67,7 @@ int* convEstado(state_t estado){
 	int j = 0;
 	char aux[38];
 	int res[16];
-	char* ptr = (char*)malloc(200*sizeof(char));
+	char* ptr; //= (char*)malloc(200*sizeof(char));
 
 	sprint_state(aux,38,&estado);
 	ptr = strtok(aux," ");
@@ -84,6 +84,7 @@ int* convEstado(state_t estado){
 	for (int i = 0;i < 16; i++){
 		//cout << res[i] << endl;
 	}
+	//free(ptr);
 	return &res[0];
 }
 
@@ -91,7 +92,7 @@ int* convEstado24(state_t estado){
 	int j = 0;
 	char aux[65];
 	int res[25];
-	char* ptr = (char*)malloc(200*sizeof(char));
+	char* ptr;// = (char*)malloc(200*sizeof(char));
 
 	sprint_state(aux,65,&estado);
 	//cout << aux << endl;
@@ -109,6 +110,7 @@ int* convEstado24(state_t estado){
 	for (int i = 0;i < 25; i++){
 		//cout << res[i] << endl;
 	}
+	//free(ptr);
 	return &res[0];	
 }
 

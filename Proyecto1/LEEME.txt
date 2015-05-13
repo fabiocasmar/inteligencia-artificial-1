@@ -1,7 +1,7 @@
 Proyecto 1 de CI5437
-Hecho por: Fabio Castro
-		   María Victoria Jorge 11-10495
-		   Jorge Marcano 11-10566
+Hecho por: Fabio Castro 10-10132
+		     María Victoria Jorge 11-10495
+		     Jorge Marcano 11-10566
 
 -> Instrucciones:
 	Para compilar cualquiera de los algoritmos debe hacerse make nombre_del_problema.algoritmo
@@ -13,9 +13,6 @@ Hecho por: Fabio Castro
    la representación de la clase nodo utilizada en los algoritmos iterativos (se encuentra en
    el directorio /src/extras) y la heurística Manhattan para los problemas de 15-puzzle y 24-puzzle
    (en src/heuristicas).
-
--> En el directorio problemas se guardan todos los archivos .c generados por psvn2c al momento de 
-   compilar alguno de los psvn existentes.
 
 -> En problemasPSVNs están los archivos PSVN de cada una de las versiones de los problemas a resolver.
 

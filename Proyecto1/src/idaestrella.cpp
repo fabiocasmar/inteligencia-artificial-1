@@ -24,7 +24,7 @@ int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t, int)){
 		return f;
 
 	if (is_goal(&e)){
-	    cout << "Estado goal :  " << print_state(stdout,&e) << endl;
+	    //cout << "Estado goal :  " << print_state(stdout,&e) << endl;
 		return 0;
 	}		
 
@@ -33,10 +33,9 @@ int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t, int)){
 		apply_fwd_rule( ruleid, &e, &hijo );
 		p = busqueda(hijo,cota,g+get_fwd_rule_cost(ruleid),funcion_h);
 		if (p == 0){
-			cout << print_state(stdout,&e) << endl;
+			//cout << print_state(stdout,&e) << endl;
 			return p;
 		}
-
 		t = min(t,p);
     }
     return t;

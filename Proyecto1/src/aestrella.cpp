@@ -25,7 +25,7 @@ public:
     typedef typename
     priority_queue<nodo*,vector<nodo*>,
     				orden>::container_type::const_iterator const_iterator;
-    nodo *find(state_t val)
+    nodo* find(state_t val)
     {
         auto first = this->c.begin();
         auto last = this->c.end();
@@ -35,52 +35,58 @@ public:
             if (compare_states(&temp.puntero,&val)==0) return *first;
             ++first;
         }
-        return NULL;
+        return *last;
     }
 };
 
 nodo* aestrella(state_t state, int (*funcion_g)(state_t,int)){
 	NuestraPila q;
-	int ruleid, costo;
+	int ruleid, costo, viejo_costo, estimado;
     ruleid_iterator_t iter; 
 	state_map_t *mapa_costo = new_state_map();
 	state_map_t *mapa_estado = new_state_map();
-	nodo* nodoRaiz = (nodo*)malloc(sizeof(nodo));
-	nodoRaiz = new nodo(state,NULL,1,0);
+	nodo* nodoRaiz = new nodo(state,NULL,1,0);
 	q.push(nodoRaiz);
 	state_map_add(mapa_costo, &state, 1);
-	state_map_add(mapa_estado, &state, 1);
+	nodo *nodoAux;
 
 	while (!(q.empty())) {
 	    state_t hijo;
 		nodo* aux = q.top();
 		q.pop();
-		state_map_add(mapa_estado, &state, 2);
+		state_map_add(mapa_estado, &aux->puntero, 2);
 
 		if (is_goal(&aux->puntero)){
+			free(mapa_estado);
+			free(mapa_costo);
 			return aux;
 		}
 
 		init_fwd_iter( &iter, &aux->puntero);
 	    while(( ruleid = next_ruleid( &iter ) ) >= 0 ){
-	    	int costo = *(state_map_get(mapa_costo, &aux->puntero))
+	    	costo = *(state_map_get(mapa_costo, &aux->puntero))
 	    											+get_fwd_rule_cost(ruleid);
 	    	apply_fwd_rule(ruleid, &aux->puntero, &hijo);
-	    	int viejo_costo = *(state_map_get(mapa_costo, &hijo)); 
-	    	nodo *nodoAux = new nodo(hijo,aux,costo,ruleid);
-	    	int temp = *state_map_get(mapa_estado, &hijo);
-	    	if(temp==2)continue;
-            if ((viejo_costo > costo)||(temp!=1)){
-            	int estimado = costo+funcion_g(hijo,0);
+	    	if((state_map_get(mapa_costo, &hijo))!=NULL){
+	    		viejo_costo = *(state_map_get(mapa_costo, &hijo));
+	    	}else{
+	    		viejo_costo = 0;
+	    	}
+	    	nodoAux = new nodo(hijo,aux,costo,ruleid);
+	    	if((state_map_get(mapa_estado, &hijo))!=NULL) 
+	    		if(*(state_map_get(mapa_estado, &hijo))==2)continue;
+            if ((state_map_get(mapa_estado, &hijo)==NULL)||
+            		(viejo_costo > costo)){
+            	estimado = costo+funcion_g(hijo,0);
             	state_map_add(mapa_costo, &hijo, costo);
-				if(temp==0){
+				if(state_map_get(mapa_estado, &hijo)==NULL){
 					state_map_add(mapa_estado, &hijo, 1);
 					totalNodos++;
 					q.push(nodoAux);
 				}else{
 					nodoAux = q.find(hijo);
-					nodoAux->padre=aux;
-					nodoAux->costo=estimado;
+					(*nodoAux).padre=aux;
+					(*nodoAux).costo=estimado;
 				}
 			}
 	    }
@@ -143,6 +149,7 @@ int main(int argc,char* argv[]){
 
 		    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
 	        cout << totalNodos/segundos << endl;
+	        free(salida);
 		}
 	}
 	else{

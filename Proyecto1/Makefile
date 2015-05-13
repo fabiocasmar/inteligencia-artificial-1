@@ -15,29 +15,34 @@ psvn2c_state_map.c:
 psvn2c_abstraction.c:
 	cp ./psvn/psvn2c_abstraction.c ./psvn2c_abstraction.c
 
-%.c: ./problemasPSVNs/%.psvn  psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c
-	./psvn/psvn2c  $(PSVNOPT) --name=$(*F)  < $< > ./problemas/$@
+%.c: ./problemas/%.psvn  psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c
+	./psvn/psvn2c  $(PSVNOPT) --name=$(*F)  < $< > ./$@
 	rm -f ./psvn2c_core.c ./psvn2c_state_map.c ./psvn2c_abstraction.c
 
 .PRECIOUS: %.c
 
 %.nodo: %.c ./src/extras/nodo.hpp ./src/extras/nodo.cpp 
-		$(CC) $(OPT) ./src/extras/nodo.cpp -include ./problemas/$<
+		$(CC) $(OPT) ./src/extras/nodo.cpp -include ./$<
 
 %.heucs: %.c ./src/ucsDDD.cpp 
-	$(CC) $(OPT) ./src/ucsDDD.cpp -include ./problemas/$<
+	$(CC) $(OPT) ./src/ucsDDD.cpp -include $<
+	rm $<
 
 %.hebfs: %.c ./src/bfsDDD.cpp 
-	$(CC) $(OPT) ./src/bfsDDD.cpp -include ./problemas/$<
+	$(CC) $(OPT) ./src/bfsDDD.cpp -include $<
+	rm $<
 
 %.heaestrella: %.c ./src/aestrella.cpp
-	$(CC) $(OPT) ./src/aestrella.cpp -include ./problemas/$<
+	$(CC) $(OPT) ./src/aestrella.cpp -include $<
+	rm $<
 
 %.hidaestrella: %.c ./src/idaestrella.cpp
-	$(CC) $(OPT) ./src/idaestrella.cpp -include ./problemas/$< 
+	$(CC) $(OPT) ./src/idaestrella.cpp -include $< 
+	rm $<
 
 %.DFID: %.c ./src/DFID.cpp
-	$(CXX) $(OPT) ./src/DFID.cpp -include ./problemas/$< -o $@
+	$(CXX) $(OPT) ./src/DFID.cpp -include $< -o $@
+	rm $<
 
 %.bfsDDD: %.c %.nodo %.hebfs
 	$(CXX) $(OPT) nodo.o bfsDDD.o -include $< -o $@
@@ -59,10 +64,12 @@ psvn2c_abstraction.c:
 	$(CC) $(OPT) ./src/heuristicas/manhattan.cpp -include $< -o $@
 
 %.arbolbusqueda: %.c ./src/arbolbusqueda.cpp
-	$(CXX) $(OPT) ./src/arbolbusqueda.cpp -include ./problemas/$< -o $@
+	$(CXX) $(OPT) ./src/arbolbusqueda.cpp -include $< -o $@
+	rm $<
 
 %.arbolpodado: %.c ./src/arbolpodado.cpp
-	$(CXX) $(OPT) ./src/arbolpodado.cpp -include ./problemas/$< -o $@
+	$(CXX) $(OPT) ./src/arbolpodado.cpp -include $< -o $@
+	rm $<
 
 %.manhattan: %.c manhattan.cpp
 	$(CXX) $(OPT) manhattan.cpp -include $< -o $@
