@@ -66,8 +66,8 @@ int dist_manh24[25][25] =
 int* convEstado(state_t estado){
 	int j = 0;
 	char aux[38];
-	int res[16];
-	char* ptr; //= (char*)malloc(200*sizeof(char));
+	int* res = new int[16];
+	char* ptr = NULL; 
 
 	sprint_state(aux,38,&estado);
 	ptr = strtok(aux," ");
@@ -81,21 +81,16 @@ int* convEstado(state_t estado){
 		j = j + 1;
 		ptr = strtok(NULL," ");		
 	}
-	for (int i = 0;i < 16; i++){
-		//cout << res[i] << endl;
-	}
-	//free(ptr);
-	return &res[0];
+	return res;
 }
 
 int* convEstado24(state_t estado){
 	int j = 0;
 	char aux[65];
-	int res[25];
-	char* ptr;// = (char*)malloc(200*sizeof(char));
+	int *res = new int[25];
+	char* ptr = NULL;
 
 	sprint_state(aux,65,&estado);
-	//cout << aux << endl;
 	ptr = strtok(aux," ");
 	
 	while(ptr!=NULL){
@@ -107,11 +102,7 @@ int* convEstado24(state_t estado){
 		j = j + 1;
 		ptr = strtok(NULL," ");		
 	}
-	for (int i = 0;i < 25; i++){
-		//cout << res[i] << endl;
-	}
-	//free(ptr);
-	return &res[0];	
+	return res;	
 }
 
 /*
@@ -120,7 +111,7 @@ int* convEstado24(state_t estado){
  */
 int calcularManhattan(state_t estado, int prob){
 	int res = 0;
-	int* tablero = (int*)malloc(sizeof(int));
+	int* tablero;
 
 	if (prob==0){
 		tablero = convEstado(estado);
@@ -133,26 +124,6 @@ int calcularManhattan(state_t estado, int prob){
 			res = res + dist_manh24[tablero[i]][i];
 		}
 	}
+	delete[] tablero;
 	return res;
 }
-
-/*
-
-int main(){
-	char estadoIni[999];
-    ssize_t nchars;
-    state_t raiz;
-    int res;
-
-	cout << "Introduzca un estado y presione ENTER : " << endl;
-	cin.getline(estadoIni,999,'\n');
-	
-	nchars = read_state(estadoIni,&raiz);
-    if (nchars <= 0) {
-		cout << "Error: El estado introducido es invalido " << endl;
-		return 0; 
-    }
-    res = calcularManhattan(raiz,0);
-    cout << "Distancia Manhattan: " << res << endl;
-}
-*/
