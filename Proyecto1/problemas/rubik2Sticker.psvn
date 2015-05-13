@@ -7,57 +7,57 @@ DOMAIN colour 6
 colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour colour
 
 A B C D E - G - - - - - - N - P - - S T U V - - =>
-C A D B S - T - - - - - - U - V - - P N G E - -
+C A D B S - T - - - - - - U - V - - P N G E - -    LABEL UCW
 
 A B C D E - G - - - - - - N - P - - S T U V - - =>
-D C B A P - N - - - - - - G - E - - V U T S - -
+D C B A P - N - - - - - - G - E - - V U T S - -    LABEL U180
 
 C A D B S - T - - - - - - U - V - - P N G E - - =>
-A B C D E - G - - - - - - N - P - - S T U V - -
+A B C D E - G - - - - - - N - P - - S T U V - -    LABEL UCCW
 
 - B - D E F G H I - K - - - - - - R - T - V - X =>
-- V - X G E H F T - R - - - - - - B - D - K - I
+- V - X G E H F T - R - - - - - - B - D - K - I    LABEL FCW
 
 - B - D E F G H I - K - - - - - - R - T - V - X =>
-- K - I H G F E D - B - - - - - - V - X - R - T
+- K - I H G F E D - B - - - - - - V - X - R - T    LABEL F180
 
 - V - X G E H F T - R - - - - - - B - D - K - I =>
-- B - D E F G H I - K - - - - - - R - T - V - X
+- B - D E F G H I - K - - - - - - R - T - V - X    LABEL FCCW
 
 - - - - - F - H I J K L M - O - Q R - - - - W X =>
-- - - - - X - W K I L J R - Q - F H - - - - M O
+- - - - - X - W K I L J R - Q - F H - - - - M O    DCW
 
 - - - - - F - H I J K L M - O - Q R - - - - W X =>
-- - - - - O - M L K J I H - F - X W - - - - R Q
+- - - - - O - M L K J I H - F - X W - - - - R Q    D180
 
 - - - - - X - W K I L J R - Q - F H - - - - M O =>
-- - - - - F - H I J K L M - O - Q R - - - - W X
+- - - - - F - H I J K L M - O - Q R - - - - W X    DCCW
 
 A - C - - - - - - J - L M N O P Q - S - U - W - =>
-Q - S - - - - - - W - U O M P N L - J - A - C -
+Q - S - - - - - - W - U O M P N L - J - A - C -    BCW
 
 A - C - - - - - - J - L M N O P Q - S - U - W - =>
-L - J - - - - - - C - A P O N M U - W - Q - S -
+L - J - - - - - - C - A P O N M U - W - Q - S -    B180
 
 Q - S - - - - - - W - U O M P N L - J - A - C - =>
-A - C - - - - - - J - L M N O P Q - S - U - W -
+A - C - - - - - - J - L M N O P Q - S - U - W -    BCCW
 
 A B - - E F - - I J - - M N - - Q R S T - - - - =>
-E F - - I J - - M N - - A B - - S Q T R - - - -
+E F - - I J - - M N - - A B - - S Q T R - - - -    RCW
 
-A B - - E F - - I J - - M N - - Q R S T - - - - =>
-I J - - M N - - A B - - E F - - T S R Q - - - -
+A B - - E F - - I J - - M N - - Q R S T - - - - => 
+I J - - M N - - A B - - E F - - T S R Q - - - -    R180
 
 E F - - I J - - M N - - A B - - S Q T R - - - - =>
-A B - - E F - - I J - - M N - - Q R S T - - - -
+A B - - E F - - I J - - M N - - Q R S T - - - -    RCCW
 
 - - C D - - G H - - K L - - O P - - - - U V W X =>
-- - O P - - C D - - G H - - K L - - - - W U X V
+- - O P - - C D - - G H - - K L - - - - W U X V    LCW 
 
 - - C D - - G H - - K L - - O P - - - - U V W X =>
-- - K L - - O P - - C D - - G H - - - - X W V U
+- - K L - - O P - - C D - - G H - - - - X W V U    L180
 
 - - O P - - C D - - G H - - K L - - - - W U X V =>
-- - C D - - G H - - K L - - O P - - - - U V W X
+- - C D - - G H - - K L - - O P - - - - U V W X    LCCW
 
 GOAL RED RED RED RED GREEN GREEN GREEN GREEN BLUE BLUE BLUE BLUE YELLOW YELLOW YELLOW YELLOW ORANGE ORANGE ORANGE ORANGE WHITE WHITE WHITE WHITE
