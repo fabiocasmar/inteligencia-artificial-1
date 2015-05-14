@@ -64,6 +64,7 @@ int main(int argc,char* argv[]){
 	string linea;
     ssize_t nchars;
     state_t raiz;
+    char* aux = NULL;
 
 	ifstream myfile (argv[1]);
 	if (myfile.is_open()){
@@ -81,6 +82,8 @@ int main(int argc,char* argv[]){
 				cout << "Error: invalid state entered.\n";
 				return 1; 
 		    }
+		    aux = new char[nchars+1];
+		    sprint_state(aux,nchars+1,&raiz);
 
 		    dfid(raiz);
 
@@ -88,8 +91,10 @@ int main(int argc,char* argv[]){
 		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
 		    double segundos = t2-t1;
 
-		    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+		    cout << aux << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
 	        cout << totalNodos/segundos << endl;
+	        delete [] aux;
+	        
 	    }
 	}
 	else{

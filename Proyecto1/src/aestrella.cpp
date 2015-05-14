@@ -121,6 +121,7 @@ int main(int argc,char* argv[]){
    	string linea;
     ssize_t nchars;
     state_t raiz;
+    char* aux = NULL;
 
     ifstream myfile (argv[1]);
 
@@ -140,6 +141,9 @@ int main(int argc,char* argv[]){
 				return 1; 
 		    }
 
+		    aux = new char[nchars+1];
+		    sprint_state(aux,nchars+1,&raiz);
+
 		    nodo* salida = aestrella(raiz,calcularManhattan);
 		    calcularNiveles(salida);
 		    
@@ -147,9 +151,11 @@ int main(int argc,char* argv[]){
 		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
 		    double segundos = t2-t1;
 
-		    cout << print_state(stdout,&raiz) << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+		    cout << aux << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
 	        cout << totalNodos/segundos << endl;
 	        free(salida);
+	        delete [] aux;
+	        
 		}
 	}
 	else{
