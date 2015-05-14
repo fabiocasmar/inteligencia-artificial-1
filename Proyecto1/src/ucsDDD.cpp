@@ -48,14 +48,14 @@ nodo* ucsDDD(state_t state){
 			}
 	    }
 	}
-	cout << "No hay camino hasta el goal \n";
+	return NULL;
 }
 
 void calcularNiveles(nodo* n){
 	if (n == NULL){
 		return;
 	}
-	// cout << print_state(stdout,&n->puntero) << endl;
+	
 	niveles++;
 	calcularNiveles(n->padre);
 }
@@ -100,10 +100,14 @@ int main(int argc,char* argv[]){
 		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
 		    double segundos = t2-t1;
 		    
-		    cout << aux << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+		    if (salida == NULL){
+		    	cout << aux << " : " << "- No hay solución " << totalNodos << " " << segundos << " ";
+		    } else {
+		    	cout << aux << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+		    }
 	        cout << totalNodos/segundos << endl;
 	        delete [] aux;
-	        
+
 		}
 	}
 	else{
