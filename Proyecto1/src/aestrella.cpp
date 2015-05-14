@@ -118,6 +118,62 @@ int main(int argc,char* argv[]){
    		return 1;
    	}
 
+
+  //  	Codigo para leer los pdbs y abstracciones segun el problema :
+  //    NOTA : Todas las variables de nombre absX(problema) y pdbX(problema) son globales en sus
+  //    respectivas heuristicas
+  //  	if (argumento2 == "15puzzle1"){
+		// abs1npuzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb1.abst");
+		// abs2npuzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb2.abst");
+		// abs3npuzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb3.abst");
+
+		// FILE *f;
+
+		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb1.txt" , "r"); 
+		// pdb1npuzzle = read_state_map(f);
+		// fclose (f);
+		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb2.txt" , "r"); 
+		// pdb2npuzzle = read_state_map(f);
+		// fclose (f);
+		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb3.txt" , "r"); 
+		// pdb3npuzzle = read_state_map(f);
+		// fclose (f);
+  //   }
+  //   // Aqui deberian venir los de 15puzzle2,24puzzle1,24puzzle2 y rubik2 y rubik3, pero aun no tenemos pdbs de eso
+  //   else if (argumento2 == "Hanoi"){ 
+  //   	// NOTA : Si existe manera de verificar si el nombre dice "HanoiXX" donde XX es un numero 
+  //   	// 12,14,,16 o 18. Entonces se puede hacer solo este if, y que dentro de cada carpeta
+  //   	// los archivos se llamen pdb1 y pdb2, de manera de que basta con este if para leer cualquier
+  //   	// caso de hanoi...Si no, es necesario hacer un if para cada Hanoi.
+  //   	abs1hanoi = read_abstraction_from_file("../PDBs/HanoiX/pdb1.abst");
+  //  		abs2hanoi = read_abstraction_from_file("../PDBs/HanoiX/pdb2.abst");
+
+  //  		FILE *f 
+
+		// f = fopen ("../PDBs/HanoiX/pdb1.txt" , "r"); 
+		// pdb1hanoi = read_state_map(f);
+		// fclose (f);
+		// f = fopen ("../PDBs/HanoiX/pdb2.txt" , "r"); 
+		// pdb2hanoi = read_state_map(f);
+		// fclose (f);
+  //   }	
+  //   else if (argumento2 == "topSpin"){
+  //   	// NOTA : Lo mismo aqui, se es posible agarrar topSpin separado de XX, se puede dejar solo este if
+  //   	// y para cada caso abrir los archivos en la carpeta TopSpinXX en vez de hacer varios ifs.
+  //   	abs1topspin = read_abstraction_from_file("../PDBs/TopSpinX/pdb1.abst");
+  //  		abs2topspin = read_abstraction_from_file("../PDBs/TopSpinX/pdb2.abst");
+
+  //  		FILE *f 
+
+		// f = fopen ("../PDBs/TopSpinX/pdb1.txt" , "r"); 
+		// pdb1hanoi = read_state_map(f);
+		// fclose (f);
+		// f = fopen ("../PDBs/TopSpinX/pdb2.txt" , "r"); 
+		// pdb2hanoi = read_state_map(f);
+		// fclose (f);
+  //   }
+
+
    	string linea;
     ssize_t nchars;
     state_t raiz;
