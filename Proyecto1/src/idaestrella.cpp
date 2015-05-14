@@ -65,23 +65,50 @@ int main(int argc,char* argv[]){
   //    NOTA : Todas las variables de nombre absX(problema) y pdbX(problema) son globales en sus
   //    respectivas heuristicas
   //  	if (argumento2 == "15puzzle1"){
-		// abs1npuzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb1.abst");
-		// abs2npuzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb2.abst");
-		// abs3npuzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb3.abst");
+		// abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb1.abst");
+		// abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb2.abst");
+		// abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb3.abst");
 
 		// FILE *f;
 
 		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb1.txt" , "r"); 
-		// pdb1npuzzle = read_state_map(f);
+		// pdb115puzzle = read_state_map(f);
 		// fclose (f);
 		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb2.txt" , "r"); 
-		// pdb2npuzzle = read_state_map(f);
+		// pdb215puzzle = read_state_map(f);
 		// fclose (f);
 		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb3.txt" , "r"); 
-		// pdb3npuzzle = read_state_map(f);
+		// pdb315puzzle = read_state_map(f);
 		// fclose (f);
   //   }
-  //   // Aqui deberian venir los de 15puzzle2,24puzzle1,24puzzle2 y rubik2 y rubik3, pero aun no tenemos pdbs de eso
+  //   // Aqui deberian venir los de 15puzzle2,24puzzle2 y rubik2 y rubik3, pero aun no tenemos pdbs de eso
+
+   // 	    else if (argumento2 == "24puzzle1"){
+	  //  	    abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb1.abst");
+			// abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb2.abst");
+			// abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb3.abst");
+			// abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb4.abst");
+			// abs524puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb5.abst");
+
+			// FILE *f;
+
+			// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb1.txt" , "r"); 
+			// pdb124puzzle = read_state_map(f);
+			// fclose (f);
+			// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb2.txt" , "r"); 
+			// pdb224puzzle = read_state_map(f);
+			// fclose (f);
+			// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb3.txt" , "r"); 
+			// pdb324puzzle = read_state_map(f);
+			// fclose (f);
+		 //    f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb4.txt" , "r"); 
+			// pdb424puzzle = read_state_map(f);
+			// fclose (f);
+			// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb5.txt" , "r"); 
+			// pdb524puzzle = read_state_map(f);
+			// fclose (f);
+
+   // 	   }
   //   else if (argumento2 == "Hanoi"){ 
   //   	// NOTA : Si existe manera de verificar si el nombre dice "HanoiXX" donde XX es un numero 
   //   	// 12,14,,16 o 18. Entonces se puede hacer solo este if, y que dentro de cada carpeta
