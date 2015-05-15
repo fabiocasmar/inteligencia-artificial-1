@@ -101,14 +101,6 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t)){
 	return NULL;
 }
 
-// void imprimirCamino(nodo* n){
-// 	if (n == NULL){
-// 		return;
-// 	}
-// 	cout << print_state(stdout,&n->puntero) << endl;
-// 	imprimirCamino(n->padre);
-// }
-
 void calcularNiveles(nodo* n){
 	if (n == NULL){
 		return;
@@ -136,7 +128,6 @@ int main(int argc,char* argv[]){
   //  	Codigo para leer los pdbs y abstracciones segun el problema :
   //    NOTA : Todas las variables de nombre absX(problema) y pdbX(problema) son globales en sus
   //    respectivas heuristicas
-	cout << "HOLA";
 	if (strcmp(argv[2],"15puzzle1")==0){
 		if (strcmp(argv[3],"pdb")==0){
 			if (strcmp(argv[4],"555")==0){
@@ -249,6 +240,7 @@ int main(int argc,char* argv[]){
 	}else if (strcmp(argv[2],"24puzzle1")==0){
 		if (strcmp(argv[3],"pdb")==0){
 			if (strcmp(argv[4],"55554")==0){
+
 				abs124puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb1.abst");
 			    abs224puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb2.abst");
 			    abs324puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb3.abst");
@@ -403,6 +395,8 @@ int main(int argc,char* argv[]){
 		fclose (f);
 		funcion_g = heuristicaHanoi;
 	}else if (strcmp(argv[2],"topSpin12")==0){
+		abs1topspin = read_abstraction_from_file("./PDBs/TopSpin12/pdb1.abst");
+   		abs2topspin = read_abstraction_from_file("./PDBs/TopSpin12/pdb2.abst");
 		FILE *f;
 		f = fopen ("./PDBs/TopSpin12/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
@@ -412,6 +406,8 @@ int main(int argc,char* argv[]){
 		fclose (f);
 		funcion_g = heuristicaTopSpin;
    }else if (strcmp(argv[2],"topSpin14")==0){
+   		abs1topspin = read_abstraction_from_file("./PDBs/TopSpin14/pdb1.abst");
+   		abs2topspin = read_abstraction_from_file("./PDBs/TopSpin14/pdb2.abst");
 		FILE *f;
 		f = fopen ("./PDBs/TopSpin14/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
@@ -421,6 +417,8 @@ int main(int argc,char* argv[]){
 		fclose (f);
 		funcion_g = heuristicaTopSpin;
    }else if (strcmp(argv[2],"topSpin16")==0){
+   		abs1topspin = read_abstraction_from_file("./PDBs/TopSpin16/pdb1.abst");
+   		abs2topspin = read_abstraction_from_file("./PDBs/TopSpin16/pdb2.abst");
 		FILE *f; 
 		f = fopen ("./PDBs/TopSpin16/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
@@ -430,6 +428,8 @@ int main(int argc,char* argv[]){
 		fclose (f);
 		funcion_g = heuristicaTopSpin;
    }else if (strcmp(argv[2],"topSpin17")==0){
+   		abs1topspin = read_abstraction_from_file("./PDBs/TopSpin17/pdb1.abst");
+   		abs2topspin = read_abstraction_from_file("./PDBs/TopSpin17/pdb2.abst");
 		FILE *f;
 		f = fopen ("./PDBs/TopSpin17/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
@@ -474,7 +474,7 @@ int main(int argc,char* argv[]){
 		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
 		    double segundos = t2-t1;
 
-		    cout << aux << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+		    cout << aux << " : " << funcion_g(raiz) << " " << niveles << " " << totalNodos << " " << segundos << " "; 
 	        cout << totalNodos/segundos << endl;
 	        free(salida);
 	        delete [] aux;
