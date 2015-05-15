@@ -3,10 +3,10 @@
 
 using namespace std;
 
-state_map_t pdb1topspin;
-state_map_t pdb2topspin;
-abstraction_t abs1topspin;
-abstraction_t abs2topspin;
+state_map_t* pdb1topspin;
+state_map_t* pdb2topspin;
+abstraction_t* abs1topspin;
+abstraction_t* abs2topspin;
 
 int heuristicaTopSpin(state_t e){
 
@@ -15,8 +15,8 @@ int heuristicaTopSpin(state_t e){
 	abstract_state(abs1topspin,&e,&abstracto1);
 	abstract_state(abs2topspin,&e,&abstracto2);
 
-	int valor1 = state_map_get(pdb1topspin,&abstracto1); 
-	int valor2 = state_map_get(pdb2topspin,&abstracto2); 
+	int valor1 = *state_map_get(pdb1topspin,&abstracto1); 
+	int valor2 = *state_map_get(pdb2topspin,&abstracto2); 
 
 	if (valor1 > valor2){
 		return valor1;

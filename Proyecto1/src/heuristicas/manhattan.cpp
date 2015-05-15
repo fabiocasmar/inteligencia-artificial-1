@@ -109,20 +109,27 @@ int* convEstado24(state_t estado){
  * Calcula la distancia manhattan de una configuración de tablero. prob = 1 si
  * es 24-puzzle, prob = 0 si es 15-puzzle
  */
-int calcularManhattan(state_t estado, int prob){
+int calcularManhattan15(state_t estado){
 	int res = 0;
 	int* tablero;
+	tablero = convEstado(estado);
+	for(int i = 0;i < 16; i++){
+		res = res + dist_manh[tablero[i]][i];
+	}
+	delete[] tablero;
+	return res;
+}
 
-	if (prob==0){
-		tablero = convEstado(estado);
-		for(int i = 0;i < 16; i++){
-			res = res + dist_manh[tablero[i]][i];
-		}
-	} else {
-		tablero = convEstado24(estado);
-		for(int i = 0;i < 25; i++){
-			res = res + dist_manh24[tablero[i]][i];
-		}
+/*
+ * Calcula la distancia manhattan de una configuración de tablero. prob = 1 si
+ * es 24-puzzle
+ */
+int calcularManhattan24(state_t estado){
+	int res = 0;
+	int* tablero;
+	tablero = convEstado24(estado);
+	for(int i = 0;i < 25; i++){
+		res = res + dist_manh24[tablero[i]][i];
 	}
 	delete[] tablero;
 	return res;

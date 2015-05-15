@@ -1,7 +1,8 @@
 CC = clang++ -c -Wc++11-extensions
 CXX = clang++
 OPT = -g -Wall -O3 -Wno-unused-function -Wno-unused-variable
-PSVNOPT = --state_map --no_abstraction --no_backwards_moves --history_len=0
+PSVNOPT = --state_map --no_backwards_moves --history_len=0
+PSVNOPT2 = #--fwd_history_len=3 --bwd_history_len=0  --backwards_moves --state_map
 
 psvn2c: ./psvn/psvn2c.cpp ./psvn/psvn2c.hpp ./psvn/psvn.cpp ./psvn/psvn.hpp
 	$(CXX) $(OPT) ./psvn/psvn2c.cpp ./psvn/psvn.cpp -o ./psvn/$@
@@ -16,7 +17,7 @@ psvn2c_abstraction.c:
 	cp ./psvn/psvn2c_abstraction.c ./psvn2c_abstraction.c
 
 %.c: ./problemas/%.psvn  psvn2c_core.c psvn2c_state_map.c psvn2c_abstraction.c
-	./psvn/psvn2c  $(PSVNOPT) --name=$(*F)  < $< > ./$@
+	./psvn/psvn2c  $(PSVNOPT2) --name=$(*F)  < $< > ./$@
 	rm -f ./psvn2c_core.c ./psvn2c_state_map.c ./psvn2c_abstraction.c
 
 .PRECIOUS: %.c
@@ -63,6 +64,18 @@ psvn2c_abstraction.c:
 %.manhattan: %.c ./src/heuristicas/manhattan.cpp
 	$(CC) $(OPT) ./src/heuristicas/manhattan.cpp -include $< -o $@
 
+%.topspin: %.c2 ./src/heuristicas/heuristicatopspin.cpp
+	$(CC) $(OPT) ./src/heuristicas/heuristicatopspin.cpp -include $< -o $@
+
+%.heuristicahanoi: %.c ./src/heuristicas/heuristicahanoi.cpp
+	$(CC) $(OPT) ./src/heuristicas/heuristicahanoi.cpp -include $< -o $@
+
+%.24puzzle1addPDB: %.c ./src/heuristicas/24puzzle1addPDB.cpp
+	$(CC) $(OPT) ./src/heuristicas/24puzzle1addPDB.cpp -include $< -o $@
+
+%.15puzzle1addPDB: %.c ./src/heuristicas/15puzzle1addPDB.cpp
+	$(CC) $(OPT) ./src/heuristicas/15puzzle1addPDB.cpp -include $< -o $@
+
 %.arbolbusqueda: %.c ./src/arbolbusqueda.cpp
 	$(CXX) $(OPT) ./src/arbolbusqueda.cpp -include $< -o $@
 	rm $<
@@ -70,9 +83,6 @@ psvn2c_abstraction.c:
 %.arbolpodado: %.c ./src/arbolpodado.cpp
 	$(CXX) $(OPT) ./src/arbolpodado.cpp -include $< -o $@
 	rm $<
-
-%.manhattan: %.c manhattan.cpp
-	$(CXX) $(OPT) manhattan.cpp -include $< -o $@
 
 .PHONY : clean
 clean:
