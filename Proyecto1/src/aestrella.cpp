@@ -136,50 +136,52 @@ int main(int argc,char* argv[]){
   //  	Codigo para leer los pdbs y abstracciones segun el problema :
   //    NOTA : Todas las variables de nombre absX(problema) y pdbX(problema) son globales en sus
   //    respectivas heuristicas
+	cout << "HOLA";
 	if (strcmp(argv[2],"15puzzle1")==0){
 		if (strcmp(argv[3],"pdb")==0){
 			if (strcmp(argv[4],"555")==0){
-				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/555/pdb1.abst");
-			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/555/pdb2.abst");
-			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle1/555/pdb3.abst");
+
+				abs115puzzle = read_abstraction_from_file("./PDBs/15puzzle1/555/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("./PDBs/15puzzle1/555/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("./PDBs/15puzzle1/555/pdb3.abst");
 				FILE *f;
-				f = fopen ("../PDBs/15puzzle1/555/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/555/pdb1.txt" , "r"); 
 				pdb115puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle1/555/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/555/pdb2.txt" , "r"); 
 				pdb215puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle1/555/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/555/pdb3.txt" , "r"); 
 				pdb315puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica15Puzzle3;
 			}else if (strcmp(argv[4],"663")==0){
-				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/663/pdb1.abst");
-			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/663/pdb2.abst");
-			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle1/663/pdb3.abst");
+				abs115puzzle = read_abstraction_from_file("./PDBs/15puzzle1/663/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("./PDBs/15puzzle1/663/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("./PDBs/15puzzle1/663/pdb3.abst");
 
 				FILE *f;
 
-				f = fopen ("../PDBs/15puzzle1/663/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/663/pdb1.txt" , "r"); 
 				pdb115puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle1/663/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/663/pdb2.txt" , "r"); 
 				pdb215puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle1/663/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/663/pdb3.txt" , "r"); 
 				pdb315puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica15Puzzle3;
 			}else if(strcmp(argv[4],"78")==0){
-				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/78/pdb1.abst");
-			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/78/pdb2.abst");
+				abs115puzzle = read_abstraction_from_file("./PDBs/15puzzle1/78/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("./PDBs/15puzzle1/78/pdb2.abst");
 
 				FILE *f;
 
-				f = fopen ("../PDBs/15puzzle1/78/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/78/pdb1.txt" , "r"); 
 				pdb115puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle1/78/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle1/78/pdb2.txt" , "r"); 
 				pdb215puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica15Puzzle2;
@@ -193,47 +195,47 @@ int main(int argc,char* argv[]){
 	}else if (strcmp(argv[2],"15puzzle2")==0){
 		if (strcmp(argv[3],"pdb")==0){
 			if (strcmp(argv[4],"555")==0){
-				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle2/555/pdb1.abst");
-			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle2/555/pdb2.abst");
-			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle2/555/pdb3.abst");
+				abs115puzzle = read_abstraction_from_file("./PDBs/15puzzle2/555/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("./PDBs/15puzzle2/555/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("./PDBs/15puzzle2/555/pdb3.abst");
 				FILE *f;
-				f = fopen ("../PDBs/15puzzle2/555/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/555/pdb1.txt" , "r"); 
 				pdb115puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle2/555/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/555/pdb2.txt" , "r"); 
 				pdb215puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle2/555/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/555/pdb3.txt" , "r"); 
 				pdb315puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica15Puzzle3;
 			}else if (strcmp(argv[4],"663")==0){
-				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle2/663/pdb1.abst");
-			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle2/663/pdb2.abst");
-			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle2/663/pdb3.abst");
+				abs115puzzle = read_abstraction_from_file("./PDBs/15puzzle2/663/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("./PDBs/15puzzle2/663/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("./PDBs/15puzzle2/663/pdb3.abst");
 
 				FILE *f;
 
-				f = fopen ("../PDBs/15puzzle2/663/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/663/pdb1.txt" , "r"); 
 				pdb115puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle2/663/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/663/pdb2.txt" , "r"); 
 				pdb215puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle2/663/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/663/pdb3.txt" , "r"); 
 				pdb315puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica15Puzzle3;
 			}else if (strcmp(argv[4],"78")==0){
-				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle2/78/pdb1.abst");
-			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle2/78/pdb2.abst");
+				abs115puzzle = read_abstraction_from_file("./PDBs/15puzzle2/78/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("./PDBs/15puzzle2/78/pdb2.abst");
 
 				FILE *f;
 
-				f = fopen ("../PDBs/15puzzle2/78/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/78/pdb1.txt" , "r"); 
 				pdb115puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/15puzzle2/78/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/15puzzle2/78/pdb2.txt" , "r"); 
 				pdb215puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica15Puzzle2;
@@ -247,44 +249,44 @@ int main(int argc,char* argv[]){
 	}else if (strcmp(argv[2],"24puzzle1")==0){
 		if (strcmp(argv[3],"pdb")==0){
 			if (strcmp(argv[4],"55554")==0){
-				abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb1.abst");
-			    abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb2.abst");
-			    abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb3.abst");
-			    abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb4.abst");
-			    abs524puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb5.abst");
+				abs124puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb1.abst");
+			    abs224puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb2.abst");
+			    abs324puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb3.abst");
+			    abs424puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb4.abst");
+			    abs524puzzle = read_abstraction_from_file("./PDBs/24puzzle1/55554/pdb5.abst");
 			    FILE *f;
-				f = fopen ("../PDBs/24puzzle1/55554/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/55554/pdb1.txt" , "r"); 
 				pdb124puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle1/55554/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/55554/pdb2.txt" , "r"); 
 				pdb224puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle1/55554/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/55554/pdb3.txt" , "r"); 
 				pdb324puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle1/55554/pdb4.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/55554/pdb4.txt" , "r"); 
 				pdb424puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle1/55554/pdb5.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/55554/pdb5.txt" , "r"); 
 				pdb524puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica24Puzzle5;
 			}else if (strcmp(argv[4],"6666")==0){
-				abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb1.abst");
-			    abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb2.abst");
-			    abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb3.abst");
-			    abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb4.abst");
+				abs124puzzle = read_abstraction_from_file("./PDBs/24puzzle1/6666/pdb1.abst");
+			    abs224puzzle = read_abstraction_from_file("./PDBs/24puzzle1/6666/pdb2.abst");
+			    abs324puzzle = read_abstraction_from_file("./PDBs/24puzzle1/6666/pdb3.abst");
+			    abs424puzzle = read_abstraction_from_file("./PDBs/24puzzle1/6666/pdb4.abst");
 			    FILE *f;
-				f = fopen ("../PDBs/24puzzle1/6666/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/6666/pdb1.txt" , "r"); 
 				pdb124puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle1/6666/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/6666/pdb2.txt" , "r"); 
 				pdb224puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle1/6666/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/6666/pdb3.txt" , "r"); 
 				pdb324puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle1/6666/pdb4.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle1/6666/pdb4.txt" , "r"); 
 				pdb424puzzle = read_state_map(f);
 				fclose (f);
 
@@ -296,44 +298,44 @@ int main(int argc,char* argv[]){
   	}else if (strcmp(argv[2],"24puzzle2")==0){
 		if (strcmp(argv[3],"pdb")==0){
 			if (strcmp(argv[4],"55554")==0){
-				abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb1.abst");
-			    abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb2.abst");
-			    abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb3.abst");
-			    abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb4.abst");
-			    abs524puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb5.abst");
+				abs124puzzle = read_abstraction_from_file("./PDBs/24puzzle2/55554/pdb1.abst");
+			    abs224puzzle = read_abstraction_from_file("./PDBs/24puzzle2/55554/pdb2.abst");
+			    abs324puzzle = read_abstraction_from_file("./PDBs/24puzzle2/55554/pdb3.abst");
+			    abs424puzzle = read_abstraction_from_file("./PDBs/24puzzle2/55554/pdb4.abst");
+			    abs524puzzle = read_abstraction_from_file("./PDBs/24puzzle2/55554/pdb5.abst");
 			    FILE *f;
-				f = fopen ("../PDBs/24puzzle2/55554/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/55554/pdb1.txt" , "r"); 
 				pdb124puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle2/55554/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/55554/pdb2.txt" , "r"); 
 				pdb224puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle2/55554/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/55554/pdb3.txt" , "r"); 
 				pdb324puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle2/55554/pdb4.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/55554/pdb4.txt" , "r"); 
 				pdb424puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle2/55554/pdb5.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/55554/pdb5.txt" , "r"); 
 				pdb524puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica24Puzzle5;
 			}else if (strcmp(argv[4],"6666")==0){
-				abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb1.abst");
-			    abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb2.abst");
-			    abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb3.abst");
-			    abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb4.abst");
+				abs124puzzle = read_abstraction_from_file("./PDBs/24puzzle2/6666/pdb1.abst");
+			    abs224puzzle = read_abstraction_from_file("./PDBs/24puzzle2/6666/pdb2.abst");
+			    abs324puzzle = read_abstraction_from_file("./PDBs/24puzzle2/6666/pdb3.abst");
+			    abs424puzzle = read_abstraction_from_file("./PDBs/24puzzle2/6666/pdb4.abst");
 			    FILE *f;
-				f = fopen ("../PDBs/24puzzle2/6666/pdb1.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/6666/pdb1.txt" , "r"); 
 				pdb124puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle2/6666/pdb2.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/6666/pdb2.txt" , "r"); 
 				pdb224puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle2/6666/pdb3.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/6666/pdb3.txt" , "r"); 
 				pdb324puzzle = read_state_map(f);
 				fclose (f);
-				f = fopen ("../PDBs/24puzzle2/6666/pdb4.txt" , "r"); 
+				f = fopen ("./PDBs/24puzzle2/6666/pdb4.txt" , "r"); 
 				pdb424puzzle = read_state_map(f);
 				fclose (f);
 				funcion_g = heuristica24Puzzle4;
@@ -342,97 +344,97 @@ int main(int argc,char* argv[]){
 			funcion_g = calcularManhattan24;
   	    }
   	}else if (strcmp(argv[2],"rubik2")==0){ 
-     	cornerAbs = read_abstraction_from_file("../PDBs/Rubik2/pdb1.abst");
-   		edge1Abs = read_abstraction_from_file("../PDBs/Rubik2/pdb2.abst");
+     	cornerAbs = read_abstraction_from_file("./PDBs/Rubik2/pdb1.abst");
+   		edge1Abs = read_abstraction_from_file("./PDBs/Rubik2/pdb2.abst");
    		FILE *f;
-		f = fopen ("../PDBs/Rubik2/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/Rubik2/pdb1.txt" , "r"); 
 		cornerPdb = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/Rubik2/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/Rubik2/pdb2.txt" , "r"); 
 		edge1Pdb = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaRubik2;
 	}else if (strcmp(argv[2],"rubik3")==0){ 
-     	cornerAbs = read_abstraction_from_file("../PDBs/Rubik3/pdb1.abst");
-   		edge1Abs = read_abstraction_from_file("../PDBs/Rubik3/pdb2.abst");
-   		edge2Abs = read_abstraction_from_file("../PDBs/Rubik3/pdb3.abst");
+     	cornerAbs = read_abstraction_from_file("./PDBs/Rubik3/pdb1.abst");
+   		edge1Abs = read_abstraction_from_file("./PDBs/Rubik3/pdb2.abst");
+   		edge2Abs = read_abstraction_from_file("./PDBs/Rubik3/pdb3.abst");
    		FILE *f;
-		f = fopen ("../PDBs/Rubik3/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/Rubik3/pdb1.txt" , "r"); 
 		cornerPdb = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/Rubik3/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/Rubik3/pdb2.txt" , "r"); 
 		edge1Pdb = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/Rubik3/pdb3.txt" , "r"); 
+		f = fopen ("./PDBs/Rubik3/pdb3.txt" , "r"); 
 		edge2Pdb = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaRubik3;
 	}else if (strcmp(argv[2],"hanoi12")==0){ 
-     	abs1hanoi = read_abstraction_from_file("../PDBs/Hanoi12/pdb1.abst");
-   		abs2hanoi = read_abstraction_from_file("../PDBs/Hanoi12/pdb2.abst");
+     	abs1hanoi = read_abstraction_from_file("./PDBs/Hanoi12/pdb1.abst");
+   		abs2hanoi = read_abstraction_from_file("./PDBs/Hanoi12/pdb2.abst");
    		FILE *f;
-		f = fopen ("../PDBs/Hanoi12/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/Hanoi12/pdb1.txt" , "r"); 
 		pdb1hanoi = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/Hanoi12/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/Hanoi12/pdb2.txt" , "r"); 
 		pdb2hanoi = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaHanoi;
 	}else if (strcmp(argv[2],"hanoi14")==0){ 
-     	abs1hanoi = read_abstraction_from_file("../PDBs/Hanoi14/pdb1.abst");
-   		abs2hanoi = read_abstraction_from_file("../PDBs/Hanoi14/pdb2.abst");
+     	abs1hanoi = read_abstraction_from_file("./PDBs/Hanoi14/pdb1.abst");
+   		abs2hanoi = read_abstraction_from_file("./PDBs/Hanoi14/pdb2.abst");
    		FILE *f;
-		f = fopen ("../PDBs/Hanoi14/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/Hanoi14/pdb1.txt" , "r"); 
 		pdb1hanoi = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/Hanoi14/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/Hanoi14/pdb2.txt" , "r"); 
 		pdb2hanoi = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaHanoi;	
 	}else if (strcmp(argv[2],"hanoi16")==0){ 
-     	abs1hanoi = read_abstraction_from_file("../PDBs/Hanoi16/pdb1.abst");
-   		abs2hanoi = read_abstraction_from_file("../PDBs/Hanoi16/pdb2.abst");
+     	abs1hanoi = read_abstraction_from_file("./PDBs/Hanoi16/pdb1.abst");
+   		abs2hanoi = read_abstraction_from_file("./PDBs/Hanoi16/pdb2.abst");
    		FILE *f;
-		f = fopen ("../PDBs/Hanoi16/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/Hanoi16/pdb1.txt" , "r"); 
 		pdb1hanoi = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/Hanoi16/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/Hanoi16/pdb2.txt" , "r"); 
 		pdb2hanoi = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaHanoi;
 	}else if (strcmp(argv[2],"topSpin12")==0){
 		FILE *f;
-		f = fopen ("../PDBs/TopSpin12/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin12/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/TopSpin12/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin12/pdb2.txt" , "r"); 
 		pdb2topspin = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaTopSpin;
    }else if (strcmp(argv[2],"topSpin14")==0){
 		FILE *f;
-		f = fopen ("../PDBs/TopSpin14/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin14/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/TopSpin14/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin14/pdb2.txt" , "r"); 
 		pdb2topspin = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaTopSpin;
    }else if (strcmp(argv[2],"topSpin16")==0){
 		FILE *f; 
-		f = fopen ("../PDBs/TopSpin16/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin16/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/TopSpin16/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin16/pdb2.txt" , "r"); 
 		pdb2topspin = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaTopSpin;
    }else if (strcmp(argv[2],"topSpin17")==0){
 		FILE *f;
-		f = fopen ("../PDBs/TopSpin17/pdb1.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin17/pdb1.txt" , "r"); 
 		pdb1topspin = read_state_map(f);
 		fclose (f);
-		f = fopen ("../PDBs/TopSpin17/pdb2.txt" , "r"); 
+		f = fopen ("./PDBs/TopSpin17/pdb2.txt" , "r"); 
 		pdb2topspin = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaTopSpin;
@@ -483,6 +485,5 @@ int main(int argc,char* argv[]){
 		std::cerr << "Error : El archivo no existe \n";
 		return 1;
 	}
-
     
 }
