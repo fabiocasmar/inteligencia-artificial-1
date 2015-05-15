@@ -5,6 +5,10 @@
 #include <vector>
 #include "./extras/nodo.hpp"
 #include "./heuristicas/manhattan.cpp"
+#include "./heuristicas/heuristicatopspin.cpp"
+#include "./heuristicas/heuristicahanoi.cpp"
+#include "./heuristicas/24puzzle1addPDB.cpp"
+#include "./heuristicas/15puzzle1addPDB.cpp"
 #include <sys/time.h>
 #include <fstream>
 
@@ -112,92 +116,299 @@ void calcularNiveles(nodo* n){
 }
 
 int main(int argc,char* argv[]){
-
+	(*funcion_g)(state_t,int)
 	if (argc < 2){
-   		std::cerr << "Error : Ingrese un archivo de entrada al ejecutar el programa \n";
+   		std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
    		return 1;
-   	}
-
+   	}else if((argc==4))&&(argv[3]=="manhattan")){
+		std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+   		return 1;
+   	}else if((argv[2]=="15puzzle1")||
+   				(argv[2]=="15puzzle2")||
+   					(argv[2]=="24puzzle1")||
+   						(argv[2]=="24puzzle2"))&&(argc < 4)){
+		std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+   		return 1;
+	}
 
   //  	Codigo para leer los pdbs y abstracciones segun el problema :
   //    NOTA : Todas las variables de nombre absX(problema) y pdbX(problema) son globales en sus
   //    respectivas heuristicas
-  //  	if (argumento2 == "15puzzle1"){
-		// abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb1.abst");
-		// abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb2.abst");
-		// abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle1/(Argumento3)/pdb3.abst");
+	if (argv[2] == "15puzzle1"){
+		if (argv[3]=="pdb"){
+			if (argv[4]=="555"){
+				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/555/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/555/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle1/555/pdb3.abst");
+				FILE *f;
+				f = fopen ("../PDBs/15puzzle1/555/pdb1.txt" , "r"); 
+				pdb115puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle1/555/pdb2.txt" , "r"); 
+				pdb215puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle1/555/pdb3.txt" , "r"); 
+				pdb315puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica15Puzzle3;
+			}else if (argv[4]=="663"){
+				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/663/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/663/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle1/663/pdb3.abst");
 
-		// FILE *f;
+				FILE *f;
 
-		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb1.txt" , "r"); 
-		// pdb115puzzle = read_state_map(f);
-		// fclose (f);
-		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb2.txt" , "r"); 
-		// pdb215puzzle = read_state_map(f);
-		// fclose (f);
-		// f = fopen ("../PDBs/15puzzle1/(Argumento3)/pdb3.txt" , "r"); 
-		// pdb315puzzle = read_state_map(f);
-		// fclose (f);
-  //   }
-  //   // Aqui deberian venir los de 15puzzle2,24puzzle1,24puzzle2 y rubik2 y rubik3, pero aun no tenemos pdbs de eso
-  //  	   else if (argumento2 == "24puzzle1"){
-  //  	    abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb1.abst");
-		// abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb2.abst");
-		// abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb3.abst");
-		// abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb4.abst");
-		// abs524puzzle = read_abstraction_from_file("../PDBs/24puzzle1/(Argumento3)/pdb5.abst");
+				f = fopen ("../PDBs/15puzzle1/663/pdb1.txt" , "r"); 
+				pdb115puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle1/663/pdb2.txt" , "r"); 
+				pdb215puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle1/663/pdb3.txt" , "r"); 
+				pdb315puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica15Puzzle3;
+			}else if (argv[4]=="78"){
+				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle1/78/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle1/78/pdb2.abst");
 
-		// FILE *f;
+				FILE *f;
 
-		// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb1.txt" , "r"); 
-		// pdb124puzzle = read_state_map(f);
-		// fclose (f);
-		// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb2.txt" , "r"); 
-		// pdb224puzzle = read_state_map(f);
-		// fclose (f);
-		// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb3.txt" , "r"); 
-		// pdb324puzzle = read_state_map(f);
-		// fclose (f);
-	 //    f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb4.txt" , "r"); 
-		// pdb424puzzle = read_state_map(f);
-		// fclose (f);
-		// f = fopen ("../PDBs/24puzzle1/(Argumento3)/pdb5.txt" , "r"); 
-		// pdb524puzzle = read_state_map(f);
-		// fclose (f);
+				f = fopen ("../PDBs/15puzzle1/78/pdb1.txt" , "r"); 
+				pdb115puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle1/78/pdb2.txt" , "r"); 
+				pdb215puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica15Puzzle2;
+			}else{
+				std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+					return 1;
+			}
+  	    }else if(argv[3]=="manhattan"){
+  	    	funcion_g = calcularManhattan;
+  	    }
+	}else if (argv[2] == "15puzzle2"){
+		if (argv[3]=="pdb"){
+			if (argv[4]=="555"){
+				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle2/555/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle2/555/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle2/555/pdb3.abst");
+				FILE *f;
+				f = fopen ("../PDBs/15puzzle2/555/pdb1.txt" , "r"); 
+				pdb115puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle2/555/pdb2.txt" , "r"); 
+				pdb215puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle2/555/pdb3.txt" , "r"); 
+				pdb315puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica15Puzzle3;
+			}else if (argv[4]=="663"){
+				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle2/663/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle2/663/pdb2.abst");
+			    abs315puzzle = read_abstraction_from_file("../PDBs/15puzzle2/663/pdb3.abst");
 
-  //  	   }
-  //   else if (argumento2 == "Hanoi"){ 
-  //   	// NOTA : Si existe manera de verificar si el nombre dice "HanoiXX" donde XX es un numero 
-  //   	// 12,14,,16 o 18. Entonces se puede hacer solo este if, y que dentro de cada carpeta
-  //   	// los archivos se llamen pdb1 y pdb2, de manera de que basta con este if para leer cualquier
-  //   	// caso de hanoi...Si no, es necesario hacer un if para cada Hanoi.
-  //   	abs1hanoi = read_abstraction_from_file("../PDBs/HanoiX/pdb1.abst");
-  //  		abs2hanoi = read_abstraction_from_file("../PDBs/HanoiX/pdb2.abst");
+				FILE *f;
 
-  //  		FILE *f 
+				f = fopen ("../PDBs/15puzzle2/663/pdb1.txt" , "r"); 
+				pdb115puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle2/663/pdb2.txt" , "r"); 
+				pdb215puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle2/663/pdb3.txt" , "r"); 
+				pdb315puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica15Puzzle3;
+			}else if (argv[4]=="78"){
+				abs115puzzle = read_abstraction_from_file("../PDBs/15puzzle2/78/pdb1.abst");
+			    abs215puzzle = read_abstraction_from_file("../PDBs/15puzzle2/78/pdb2.abst");
 
-		// f = fopen ("../PDBs/HanoiX/pdb1.txt" , "r"); 
-		// pdb1hanoi = read_state_map(f);
-		// fclose (f);
-		// f = fopen ("../PDBs/HanoiX/pdb2.txt" , "r"); 
-		// pdb2hanoi = read_state_map(f);
-		// fclose (f);
-  //   }	
-  //   else if (argumento2 == "topSpin"){
-  //   	// NOTA : Lo mismo aqui, se es posible agarrar topSpin separado de XX, se puede dejar solo este if
-  //   	// y para cada caso abrir los archivos en la carpeta TopSpinXX en vez de hacer varios ifs.
-  //   	abs1topspin = read_abstraction_from_file("../PDBs/TopSpinX/pdb1.abst");
-  //  		abs2topspin = read_abstraction_from_file("../PDBs/TopSpinX/pdb2.abst");
+				FILE *f;
 
-  //  		FILE *f 
+				f = fopen ("../PDBs/15puzzle2/78/pdb1.txt" , "r"); 
+				pdb115puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/15puzzle2/78/pdb2.txt" , "r"); 
+				pdb215puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica15Puzzle2;
+			}else{
+				std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+					return 1;
+			}
+  	    }else if(argv[3]=="manhattan"){
+  	    	funcion_g = calcularManhattan;
+  	    }
+	}else if (argv[2] == "24puzzle1"){
+		if (argv[3]=="pdb"){
+			if (argv[4]=="55554"){
+				abs125puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb1.abst");
+			    abs225puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb2.abst");
+			    abs325puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb3.abst");
+			    abs425puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb4.abst");
+			    abs525puzzle = read_abstraction_from_file("../PDBs/24puzzle1/55554/pdb5.abst");
+			    FILE *f;
+				f = fopen ("../PDBs/24puzzle1/55554/pdb1.txt" , "r"); 
+				pdb124puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle1/55554/pdb2.txt" , "r"); 
+				pdb224puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle1/55554/pdb3.txt" , "r"); 
+				pdb324puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle1/55554/pdb4.txt" , "r"); 
+				pdb424puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle1/55554/pdb5.txt" , "r"); 
+				pdb524puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica24Puzzle5;
+			}else if (argv[4]=="6666"){
+				abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb1.abst");
+			    abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb2.abst");
+			    abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb3.abst");
+			    abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle1/6666/pdb4.abst");
+			    FILE *f;
+				f = fopen ("../PDBs/24puzzle1/6666/pdb1.txt" , "r"); 
+				pdb124puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle1/6666/pdb2.txt" , "r"); 
+				pdb224puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle1/6666/pdb3.txt" , "r"); 
+				pdb324puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle1/6666/pdb4.txt" , "r"); 
+				pdb424puzzle = read_state_map(f);
+				fclose (f);
 
-		// f = fopen ("../PDBs/TopSpinX/pdb1.txt" , "r"); 
-		// pdb1hanoi = read_state_map(f);
-		// fclose (f);
-		// f = fopen ("../PDBs/TopSpinX/pdb2.txt" , "r"); 
-		// pdb2hanoi = read_state_map(f);
-		// fclose (f);
-  //   }
+				funcion_g = heuristica24Puzzle4;
+			}
+		}else if(argv[3]=="manhattan"){
+			funcion_g = calcularManhattan;
+  	    }
+  	}else if (argv[2] == "24puzzle2"){
+		if (argv[3]=="pdb"){
+			if (argv[4]=="55554"){
+				abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb1.abst");
+			    abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb2.abst");
+			    abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb3.abst");
+			    abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb4.abst");
+			    abs524puzzle = read_abstraction_from_file("../PDBs/24puzzle2/55554/pdb5.abst");
+			    FILE *f;
+				f = fopen ("../PDBs/24puzzle2/55554/pdb1.txt" , "r"); 
+				pdb124puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle2/55554/pdb2.txt" , "r"); 
+				pdb224puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle2/55554/pdb3.txt" , "r"); 
+				pdb324puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle2/55554/pdb4.txt" , "r"); 
+				pdb424puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle2/55554/pdb5.txt" , "r"); 
+				pdb524puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica24Puzzle5;
+			}else if (argv[4]=="6666"){
+				abs124puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb1.abst");
+			    abs224puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb2.abst");
+			    abs324puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb3.abst");
+			    abs424puzzle = read_abstraction_from_file("../PDBs/24puzzle2/6666/pdb4.abst");
+			    FILE *f;
+				f = fopen ("../PDBs/24puzzle2/6666/pdb1.txt" , "r"); 
+				pdb124puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle2/6666/pdb2.txt" , "r"); 
+				pdb224puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle2/6666/pdb3.txt" , "r"); 
+				pdb324puzzle = read_state_map(f);
+				fclose (f);
+				f = fopen ("../PDBs/24puzzle2/6666/pdb4.txt" , "r"); 
+				pdb424puzzle = read_state_map(f);
+				fclose (f);
+				funcion_g = heuristica24Puzzle4;
+			}
+		}else if(argv[3]=="manhattan"){
+			funcion_g = calcularManhattan;
+  	    }
+  	}else if (argv[2] == "hanoi12"){ 
+     	abs1hanoi = read_abstraction_from_file("../PDBs/Hanoi12/pdb1.abst");
+   		abs2hanoi = read_abstraction_from_file("../PDBs/Hanoi12/pdb2.abst");
+   		FILE *f 
+		f = fopen ("../PDBs/Hanoi12/pdb1.txt" , "r"); 
+		pdb1hanoi = read_state_map(f);
+		fclose (f);
+		f = fopen ("../PDBs/Hanoi12/pdb2.txt" , "r"); 
+		pdb2hanoi = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaHanoi;
+	}else if (argv[2] == "hanoi14"){ 
+     	abs1hanoi = read_abstraction_from_file("../PDBs/Hanoi14/pdb1.abst");
+   		abs2hanoi = read_abstraction_from_file("../PDBs/Hanoi14/pdb2.abst");
+   		FILE *f 
+		f = fopen ("../PDBs/Hanoi14/pdb1.txt" , "r"); 
+		pdb1hanoi = read_state_map(f);
+		fclose (f);
+		f = fopen ("../PDBs/Hanoi14/pdb2.txt" , "r"); 
+		pdb2hanoi = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaHanoi;	
+	}else if (argv[2] == "hanoi16"){ 
+     	abs1hanoi = read_abstraction_from_file("../PDBs/Hanoi16/pdb1.abst");
+   		abs2hanoi = read_abstraction_from_file("../PDBs/Hanoi16/pdb2.abst");
+   		FILE *f 
+		f = fopen ("../PDBs/Hanoi16/pdb1.txt" , "r"); 
+		pdb1hanoi = read_state_map(f);
+		fclose (f);
+		f = fopen ("../PDBs/Hanoi16/pdb2.txt" , "r"); 
+		pdb2hanoi = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaHanoi;
+	}else if (argv[2] == "topSpin12"){
+		FILE *f 
+		f = fopen ("../PDBs/TopSpin12/pdb1.txt" , "r"); 
+		pdb1topspin = read_state_map(f);
+		fclose (f);
+		f = fopen ("../PDBs/TopSpin12/pdb2.txt" , "r"); 
+		pdb2topspin = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaTopSpin;
+   }else if (argv[2] == "topSpin14"){
+		FILE *f 
+		f = fopen ("../PDBs/TopSpin14/pdb1.txt" , "r"); 
+		pdb1topspin = read_state_map(f);
+		fclose (f);
+		f = fopen ("../PDBs/TopSpin14/pdb2.txt" , "r"); 
+		pdb2topspin = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaTopSpin;
+   }else if (argv[2] == "topSpin16"){
+		FILE *f 
+		f = fopen ("../PDBs/TopSpin16/pdb1.txt" , "r"); 
+		pdb1topspin = read_state_map(f);
+		fclose (f);
+		f = fopen ("../PDBs/TopSpin16/pdb2.txt" , "r"); 
+		pdb2topspin = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaTopSpin;
+   }else if (argv[2] == "topSpin17"){
+		FILE *f 
+		f = fopen ("../PDBs/TopSpin17/pdb1.txt" , "r"); 
+		pdb1topspin = read_state_map(f);
+		fclose (f);
+		f = fopen ("../PDBs/TopSpin17/pdb2.txt" , "r"); 
+		pdb2topspin = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaTopSpin;
+   }
 
 
    	string linea;
@@ -226,7 +437,7 @@ int main(int argc,char* argv[]){
 		    aux = new char[nchars+1];
 		    sprint_state(aux,nchars+1,&raiz);
 
-		    nodo* salida = aestrella(raiz,calcularManhattan);
+		    nodo* salida = aestrella(raiz,funcion_g);
 		    calcularNiveles(salida);
 		    
 		    gettimeofday(&t,NULL);
