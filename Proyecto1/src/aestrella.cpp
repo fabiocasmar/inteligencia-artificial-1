@@ -45,7 +45,31 @@ public:
     }
 };
 
-nodo* aestrella(state_t state, int (*funcion_g)(state_t)){
+bool podarParalelos(state_t hijo,int ruleid,nodo* padre){
+    string labelHijo = get_fwd_rule_label(ruleid);
+    string labelPadre = get_fwd_rule_label(padre->ruleid);
+
+    if (labelHijo[2] == labelPadre[2]){
+        // Si la direccion del movimiento del hijo y del padre son iguales...
+        // Chequea a ver si el hijo mueve una cara fuerte y el padre la debil asociada...
+        // de ser asi, el movimiento no pasa y no se expande ese hijo
+        if (((labelHijo[0] == 'U') and (labelPadre[0] == 'D'))
+            or ((labelHijo[0] == 'R') and (labelPadre[0] == 'L'))
+                or ((labelHijo[0] == 'F') and (labelPadre[0] == 'B'))){
+            return true;
+        }
+    } // El else if the abajo es para evitar que movimientos seguidos contrarios pasen.
+    else if ((((labelHijo[2] == 'W') and (labelPadre[2] == 'C')) 
+                or ((labelHijo[2] == 'C') and (labelPadre[2] == 'W'))
+                    or ((labelHijo[2] == '8') and (labelPadre[2] == '8')))
+                        and (labelPadre[0] == labelHijo[0])){
+            return true;
+    }
+
+    return false;
+}
+
+nodo* aestrella(state_t state, int (*funcion_g)(state_t),bool rubik){
 	NuestraPila q;
 	int ruleid, costo, viejo_costo, estimado;
     ruleid_iterator_t iter; 
@@ -85,14 +109,27 @@ nodo* aestrella(state_t state, int (*funcion_g)(state_t)){
             		(viejo_costo > costo)){
             	estimado = costo+funcion_g(hijo);
             	state_map_add(mapa_costo, &hijo, costo);
-				if(state_map_get(mapa_estado, &hijo)==NULL){
-					state_map_add(mapa_estado, &hijo, 1);
-					totalNodos++;
-					q.push(nodoAux);
-				}else{
-					nodoAux = q.find(hijo);
-					(*nodoAux).padre=aux;
-					(*nodoAux).costo=estimado;
+            	if (!(rubik)){
+					if(state_map_get(mapa_estado, &hijo)==NULL){
+						state_map_add(mapa_estado, &hijo, 1);
+						totalNodos++;
+						q.push(nodoAux);
+					}else{
+						nodoAux = q.find(hijo);
+						(*nodoAux).padre=aux;
+						(*nodoAux).costo=estimado;
+					}
+				}
+				else{
+					if((state_map_get(mapa_estado, &hijo)==NULL) || (podarParalelos(hijo,ruleid,aux))){
+						state_map_add(mapa_estado, &hijo, 1);
+						totalNodos++;
+						q.push(nodoAux);
+					}else{
+						nodoAux = q.find(hijo);
+						(*nodoAux).padre=aux;
+						(*nodoAux).costo=estimado;
+					}
 				}
 			}
 	    }
@@ -467,7 +504,14 @@ int main(int argc,char* argv[]){
 		    aux = new char[nchars+1];
 		    sprint_state(aux,nchars+1,&raiz);
 
-		    nodo* salida = aestrella(raiz,funcion_g);
+		    nodo* salida;
+		    if ((strcmp(argv[2],"rubik2")==0) or (strcmp(argv[2],"rubik3")==0)){
+		    	salida = aestrella(raiz,funcion_g,true);
+		    }
+		    else {
+		    	salida = aestrella(raiz,funcion_g,false);
+		    }
+
 		    calcularNiveles(salida);
 		    
 		    gettimeofday(&t,NULL);
