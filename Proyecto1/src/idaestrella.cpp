@@ -5,6 +5,7 @@
 #include <vector>
 #include <sys/time.h>
 #include "./extras/nodo.hpp"
+#include "./extras/podarRubik.cpp"
 #include "./heuristicas/manhattan.cpp"
 #include "./heuristicas/rubikPDB.cpp"
 #include "./heuristicas/15puzzle1addPDB.cpp"
@@ -20,7 +21,7 @@ const int MAXINT = numeric_limits<int>::max();
 int niveles = 0;
 int totalNodos = 0;
 
-int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t)){
+int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t),bool rubik){
 	int ruleid ;	
 	int t = MAXINT;
     ruleid_iterator_t iter; 
@@ -34,14 +35,24 @@ int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t)){
 	}
 
 	if (is_goal(&e)){
-	    //cout << "Estado goal :  " << print_state(stdout,&e) << endl;
 		return 0;
 	}		
 
 	init_fwd_iter( &iter, &e );
     while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
 		apply_fwd_rule( ruleid, &e, &hijo );
-		p = busqueda(hijo,cota,g+get_fwd_rule_cost(ruleid),funcion_h);
+
+		if (rubik){
+			nodo* padre = new nodo(e,NULL,0,ruleid);
+			if (podarParalelos(hijo,ruleid,padre)){
+				free(padre);
+				continue;
+			}
+			free(padre);
+		}
+
+		p = busqueda(hijo,cota,g+get_fwd_rule_cost(ruleid),funcion_h,rubik);
+
 		if (p == 0){
 			niveles++;
 			return p;
@@ -51,11 +62,11 @@ int busqueda(state_t e, int cota, int g, int (*funcion_h)(state_t)){
     return t;
 }
 
-void ida_estrella(state_t raiz, int (*funcion_h)(state_t)){
+void ida_estrella(state_t raiz, int (*funcion_h)(state_t),bool rubik){
 	int p;
 	int cota = funcion_h(raiz);
 	while ( true ){
-		p = busqueda(raiz,cota,0,funcion_h);
+		p = busqueda(raiz,cota,0,funcion_h,rubik);
 		if(p == -1) break;
 		if(p == 0) break;
 		cota = p;
@@ -420,13 +431,18 @@ int main(int argc,char* argv[]){
 		    aux = new char[nchars+1];
 		    sprint_state(aux,nchars+1,&raiz);
 
-		    ida_estrella(raiz,funcion_g);
+		    if ((strcmp(argv[2],"rubik2")==0) or (strcmp(argv[2],"rubik3")==0)){
+		    	ida_estrella(raiz,funcion_g,true);
+		    }
+		    else{
+		    	ida_estrella(raiz,funcion_g,false);
+		    }
 
 		    gettimeofday(&t,NULL);
 		    double t2 = t.tv_sec+(t.tv_usec/1000000.0);
 		    double segundos = t2-t1;
 
-		    cout << aux << " : " << "- " << niveles << " " << totalNodos << " " << segundos << " "; 
+		    cout << aux << " : " << funcion_g(raiz) << " " << niveles << " " << totalNodos << " " << segundos << " "; 
 	        cout << totalNodos/segundos << endl;
 	        delete [] aux;
 		}
