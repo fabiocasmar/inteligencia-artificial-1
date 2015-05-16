@@ -5,16 +5,31 @@ Hecho por: Fabio Castro 10-10132
 
 -> Instrucciones:
 	Para compilar cualquiera de los algoritmos debe hacerse make nombre_del_problema.algoritmo
-	Luego, se ejecuta haciendo ./nombre_del_problema.algoritmo archivo_entrada, donde el archivo
-	de entrada es el que contiene cada uno de los estados iniciales desde donde quieren empezarse
-	las corridas.
+	Luego, se ejecuta haciendo.
+
+   Para ejecutar el programa depende del problema :
+      - Para N-puzzle :
+         ./nombre_del_problema1.algoritmo archivo_entrada nombre_del_problema2 pdb/manhattan tipo_de_pdb
+
+      - Para el resto de los problemas :
+         ./nombre_del_problema1.algoritmo archivo_entrada nombre_del_problema2 
+
+      Donde :
+         nombre_del_problema1 es : 15puzzle1,15puzzle2,24puzzle1,24puzzle2,Hanoi(12,14,16,18),topSpin(12,14,16,17),
+                                   rubik2Sticker,  rubik3Sticker.
+         archivo_entrada es : Un archivo de texto con los estados sobre los cuales se ejecutara el algoritmo.
+         nombre_del_problema2 es : 15puzzle1,15puzzle2,24puzzle1,24puzzle2,hanoi(12,14,16,18),topSpin(12,14,16,17),
+                                   rubik2,rubik3.
+         pdb/manhattan es : Para los N-puzzle decide si se utilizara una pdb aditiva o manhattan como heuristica
+         tipo_de_pdb es : Para 15puzzle -> 555 o 663, para 24puzzle -> 55554
 
 -> El directorio src contiene los archivos correspondientes a todos los algoritmos de búsqueda,
    la representación de la clase nodo utilizada en los algoritmos iterativos (se encuentra en
-   el directorio /src/extras) y la heurística Manhattan para los problemas de 15-puzzle y 24-puzzle
-   (en src/heuristicas).
+   el directorio /src/extras), la heurística Manhattan para los problemas de 15-puzzle y 24-puzzle
+   (en src/heuristicas) y la funcion para podar los duplicados obvios en a* e ida* para los problemas
+   de rubik (en /src/extras).
 
--> En problemasPSVNs están los archivos PSVN de cada una de las versiones de los problemas a resolver.
+-> En problemas están los archivos PSVN de cada una de las versiones de los problemas a resolver.
 
 -> El directorio Salidas Arboles contiene las tablas para cada problema donde se reporta el número de 
    estados visitados a cada profundidad en el árbol de búsqueda a partir del estado goal, hasta la 
@@ -22,3 +37,28 @@ Hecho por: Fabio Castro 10-10132
    En Sin Podar se encuentran los reportes sin realizar ningún tipo de podado de duplicados y en
    Podado Parcial están las tablas correspondientes a los recorridos utilizando podado de duplicados
    de padres.
+
+-> En PDBs se encuentran los distintos PDBs para cada problema. Cada problema tiene una carpeta asociada,
+   la cual contiene los PDBs asociados a cada uno. Para los problemas de Hanoi y TopSpin se utilizaron dos PDBs
+   y se uso como heuristica el maximo entre ellas, en el caso de N-puzzle, dentro hay distintas carpetas con 
+   los PDBs asociados a cada una de las PDBs aditivas para usar como heuristica.
+
+-> Nota 1 : Los PDBs para los problemas de rubik no pudimos generarlos. Intentamos en distintas computadoras 
+            con 4GB y 8GB de RAM y diversos procesadores, usando distintas combinaciones de proyecciones,pero
+            a pesar de esto no logramos crear los PDBs. A pesar de esto, el programa deberia funcionar 
+            en caso de que el usuario tenga PDBs a la mano y los introduzca en la carpeta de PDBs de Rubik2 o Rubik3
+            siempre y cuando se respete el formato indicado en la Nota 2.
+
+-> Nota 2 : El proyecto se corrio con los PDBs que se encuentran en la carpeta de PDBs. A pesar de esto, el usuario
+            puede utilizar sus propios PDBs para correr el programa siempre y cuando cumpla con el siguiente formato :
+            - Los nombres de los archivos con abstracciones adentro deben ser de la forma pdbX.abst donde X es un numero
+              que va aumentando de 1 en 1 segun el numero de PDBs a usar para el problema. (Si se usan 3 pdbs,los .abst
+              deben ser pdb1.abst, pdb2.abst y pdb3.abst).
+            - Los nombres de los archivos con los PDBs en forma de state_map en formato binario deben tener la forma
+              pdbY.txt donde Y es igual a la abstraccion X con la que esta asociado el PDB.
+            - Cada problema tiene un numero fijo de PDBs que se pueden usar :
+               *15puzzle1 y 15puzzle2 pueden usar 2 o 3 PDBs aditivas dependiendo de la carpeta en la que se guarden.
+               *24puzzle1 y 24puzzle2 pueden usar 4 o 5 PDBs aditivas dependiendo de la carpeta en la que se guarden.
+               *HanoiXX y TopSpinXX usan siempre 2 PDBs y se utiliza el maximo entre las dos como heuristica.
+               *Rubik2 usa 2 PDBs y utiliza el maximo entre las dos como heuristica.
+               *Rubik3 use 3 PDBs y utiliza el maximo de las tres como heuristica.

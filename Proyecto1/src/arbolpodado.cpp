@@ -42,7 +42,7 @@ int dfid_visita(state_t e, int cota, int nivel, state_t ultEstado){
 	init_fwd_iter( &iter, &e );
     while( ( ruleid = next_ruleid( &iter ) ) >= 0 ) {
 		apply_fwd_rule( ruleid, &e, &hijo );
-		if (compare_states(&hijo,&ultEstado)==0) { // Si el estado que genero es igual al estado del que vengo lo ignoro
+		if (compare_states(&hijo,&ultEstado)==0) { 
 			continue;
 		}
 		p = dfid_visita(hijo,cota, nivel+1,e);
@@ -58,7 +58,6 @@ int main(){
     ssize_t nchars;
     state_t raiz;
 
-	//cout << "Please enter a state followed by ENTER: \n";
 	cin.getline(estadoIni,999,'\n');
 	
 	nchars = read_state(estadoIni,&raiz);
