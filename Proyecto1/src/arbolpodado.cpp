@@ -62,7 +62,7 @@ int main(){
 	
 	nchars = read_state(estadoIni,&raiz);
     if (nchars <= 0) {
-		cout << "Error: invalid state entered.\n";
+		cout << "Error: se ha ingresado un estado inválido.\n";
 		return 0; 
     }
 

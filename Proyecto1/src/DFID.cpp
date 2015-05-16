@@ -79,7 +79,7 @@ int main(int argc,char* argv[]){
 
 			nchars = read_state(c,&raiz);
 		    if (nchars <= 0) {
-				cout << "Error: invalid state entered.\n";
+				cout << "Error: se ha ingresado un estado inválido.\n";
 				return 1; 
 		    }
 		    aux = new char[nchars+1];

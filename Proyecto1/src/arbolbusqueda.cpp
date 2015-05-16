@@ -52,12 +52,11 @@ int main(){
     ssize_t nchars;
     state_t raiz;
 
-	//cout << "Please enter a state followed by ENTER: \n";
 	cin.getline(estadoIni,999,'\n');
 	
 	nchars = read_state(estadoIni,&raiz);
     if (nchars <= 0) {
-		cout << "Error: invalid state entered.\n";
+		cout << "Error: se ha ingresado un estado inválido.\n";
 		return 0; 
     }
 

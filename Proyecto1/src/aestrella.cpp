@@ -126,16 +126,16 @@ void calcularNiveles(nodo* n){
 int main(int argc,char* argv[]){
 	int (*funcion_g)(state_t);
 	if (argc < 3){
-   		std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+   		std::cerr << "Error, la sintaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
    		return 1;
    	}else if((argc==5)&&(strcmp(argv[3],"manhattan")==0)){
-		std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+		std::cerr << "Error, la sintaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
    		return 1;
    	}else if(((strcmp(argv[2],"15puzzle1")==0)||
    				(strcmp(argv[2],"15puzzle2")==0)||
    					(strcmp(argv[2],"24puzzle1")==0)||
    						(strcmp(argv[2],"24puzzle2")==0))&&(argc < 4)){
-		std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+		std::cerr << "Error, la sintaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
    		return 1;
 	}
 
@@ -191,7 +191,7 @@ int main(int argc,char* argv[]){
 				fclose (f);
 				funcion_g = heuristica15Puzzle2;
 			}else{
-				std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+				std::cerr << "Error, la sintaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
 					return 1;
 			}
   	    }else if(strcmp(argv[3],"manhattan")==0){
@@ -245,7 +245,7 @@ int main(int argc,char* argv[]){
 				fclose (f);
 				funcion_g = heuristica15Puzzle2;
 			}else{
-				std::cerr << "Error, la sitaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
+				std::cerr << "Error, la sintaxis es: archivo.txt nombre_problema (manhattan|pdb modo_pdb) \n";
 					return 1;
 			}
   	    }else if(strcmp(argv[3],"manhattan")==0){
@@ -474,7 +474,7 @@ int main(int argc,char* argv[]){
 			
 			nchars = read_state(c,&raiz);
 		    if (nchars <= 0) {
-				cout << "Error: El estado introducido es invalido " << endl;
+				cout << "Error: El estado introducido es inválido " << endl;
 				return 1; 
 		    }
 
