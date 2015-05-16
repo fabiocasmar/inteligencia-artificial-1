@@ -1,0 +1,11 @@
+- Los nombres de los archivos con abstracciones adentro deben ser de la forma pdbX.abst donde X es un número
+              que va aumentando de 1 en 1 segun el numero de PDBs a usar para el problema. (Si se usan 3 pdbs,los .abst
+              deben ser pdb1.abst, pdb2.abst y pdb3.abst).
+- Los nombres de los archivos con los PDBs en forma de state_map en formato binario deben tener la forma
+  pdbY.txt donde Y es igual a la abstracción X con la que esta asociado el PDB.
+- Cada problema tiene un numero fijo de PDBs que se pueden usar :
+   *15puzzle1 y 15puzzle2 pueden usar 2 o 3 PDBs aditivas dependiendo de la carpeta en la que se guarden.
+   *24puzzle1 y 24puzzle2 pueden usar 4 o 5 PDBs aditivas dependiendo de la carpeta en la que se guarden.
+   *HanoiXX y TopSpinXX usan siempre 2 PDBs y se utiliza el máximo entre las dos como heurística.
+   *Rubik2 usa 2 PDBs y utiliza el máximo entre las dos como heurística.
+   *Rubik3 usa 3 PDBs y utiliza el máximo de las tres como heurística.
