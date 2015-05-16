@@ -408,6 +408,17 @@ int main(int argc,char* argv[]){
 		pdb2hanoi = read_state_map(f);
 		fclose (f);
 		funcion_g = heuristicaHanoi;
+	}else if (strcmp(argv[2],"hanoi18")==0){ 
+     	abs1hanoi = read_abstraction_from_file("./PDBs/Hanoi18/pdb1.abst");
+   		abs2hanoi = read_abstraction_from_file("./PDBs/Hanoi18/pdb2.abst");
+   		FILE *f;
+		f = fopen ("./PDBs/Hanoi18/pdb1.txt" , "r"); 
+		pdb1hanoi = read_state_map(f);
+		fclose (f);
+		f = fopen ("./PDBs/Hanoi18/pdb2.txt" , "r"); 
+		pdb2hanoi = read_state_map(f);
+		fclose (f);
+		funcion_g = heuristicaHanoi;
 	}else if (strcmp(argv[2],"topSpin12")==0){
 		abs1topspin = read_abstraction_from_file("./PDBs/TopSpin12/pdb1.abst");
    		abs2topspin = read_abstraction_from_file("./PDBs/TopSpin12/pdb2.abst");
