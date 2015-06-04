@@ -4,46 +4,47 @@
 
 using namespace std;
 const int MININT = std::numeric_limits<int>::min();
+const int MAXINT = std::numeric_limits<int>::max();
 
-int negamax(state_t node,int depth,int color){
+int negamax(state_t node,int depth,bool color){
 	int val = 0;
 	int score;
 	state_t child;
 
 	if ((depth == 0) || (node.terminal())){
-		 cout << "Terminar el juego : \n";
-		 cout << "Node : \n";
-		 cout << node << endl;
+        if (color == 0){
+            color = -1;
+        }
 		return color*(node.value());
 	}
 
 	score = MININT;
 
 	for (int i = 4; i < 36;i++){
-		if (node.outflank(color,i)){
-			// cout << "Node : \n";
-			// cout << node << endl;
-			// cout << "Node move : \n";
-			// cout << node.move(color,i) << endl;
-			// cout << "Depth : " << depth << endl;
-			child = node.move(color,i);
-			val = negamax(child,depth-1,-color);
-		}else{
-			cout << "PASEEE";
-			val = negamax(node,depth,-color);
-		}
-		score = MAX(score,-val);
+        if (node.is_free(i)){
+    		if (node.outflank(color,i)){
+    			child = node.move(color,i);
+    			val = negamax(child,depth,not(color));
+    		}else{
+                // cout << "Pasando con \n";
+                // cout << "Color : " << color << endl;
+                // cout << "Pos : " << i << endl;
+    			val = negamax(node,depth,not(color));
+    		}
+    		score = MAX(score,-val);
+        }
 	}
 
 	return score;
 }
 
 int main(int argc, const char **argv) {
+    bool player = 0;
     state_t state;
     cout << state << endl;
     cout << "Principal variation:" << endl;
-    for( int i = 0; PV[i] != 35; ++i ) {
-        bool player = i % 2 == 0; // black moves first!
+    for( int i = 0; PV[i] != 29; ++i ) {
+        player = i % 2 == 0; // black moves first!
         int pos = PV[i];
         cout << state;
         cout << (player ? "Black" : "White")
@@ -52,12 +53,13 @@ int main(int argc, const char **argv) {
         state = state.move(player, pos);
         cout << "Board after " << i+1 << (i == 0 ? " ply:" : " plies:") << endl;
     }
+    cout << "Estado de entrada al negamax : \n";
     cout << state;
     // cout << "Value of the game = " << state.value() << endl;
     // cout << "#bits per state = " << sizeof(state) * 8 << endl;
 
     int valor = 0;
-    valor = negamax(state,4,1);
+    valor = negamax(state,MAXINT, not(player));
     cout << "Value of the game = " << valor << endl;
 
     if( argc > 1 ) {
