@@ -9,6 +9,7 @@ const int MAXINT = std::numeric_limits<int>::max();
 int negamax(state_t node,int depth,bool color){
 	int val = 0;
 	int score;
+    bool moved = false;
 	state_t child;
 
 	if ((depth == 0) || (node.terminal())){
@@ -24,15 +25,14 @@ int negamax(state_t node,int depth,bool color){
         if (node.is_free(i)){
     		if (node.outflank(color,i)){
     			child = node.move(color,i);
-    			val = negamax(child,depth-1,not(color));
-    		}else{
-                // cout << "Pasando con \n";
-                // cout << "Color : " << color << endl;
-                // // cout << "Pos : " << i << endl;
-                // cout << "Sigo bajando \n";
-    			val = negamax(node,depth-1,not(color));
-    		}
-    		score = MAX(score,-val);
+    			val = negamax(child,depth,not(color));
+                moved = true;
+                score = MAX(score,-val);
+            }
+        }
+        if ((!moved) && (i == 35)){
+            val = negamax(node,depth,not(color));
+            score = MAX(score,-val);
         }
 	}
 
@@ -44,7 +44,7 @@ int main(int argc, const char **argv) {
     state_t state;
     cout << state << endl;
     cout << "Principal variation:" << endl;
-    for( int i = 0; PV[i] != 29 ; ++i ) {
+    for( int i = 0; PV[i] != 24 ; ++i ) {
         player = i % 2 == 0; // black moves first!
         int pos = PV[i];
         cout << state;
@@ -60,7 +60,7 @@ int main(int argc, const char **argv) {
     // cout << "#bits per state = " << sizeof(state) * 8 << endl;
 
     int valor = 0;
-    valor = negamax(state,15, not(player));
+    valor = negamax(state,MAXINT, not(player));
     cout << "Value of the game = " << valor << endl;
 
     if( argc > 1 ) {
