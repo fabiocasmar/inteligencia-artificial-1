@@ -14,9 +14,11 @@ int negamax(state_t node,int depth,bool color){
 
 	if ((depth == 0) || (node.terminal())){
         if (color == 0){
-            color = -1;
+            return -(node.value());
+        }else{
+            return (node.value());
         }
-		return color*(node.value());
+		
 	}
 
 	score = MININT;
@@ -44,7 +46,7 @@ int main(int argc, const char **argv) {
     state_t state;
     cout << state << endl;
     cout << "Principal variation:" << endl;
-    for( int i = 0; PV[i] != 24 ; ++i ) {
+    for( int i = 0; PV[i] != 30 ; ++i ) {
         player = i % 2 == 0; // black moves first!
         int pos = PV[i];
         cout << state;
