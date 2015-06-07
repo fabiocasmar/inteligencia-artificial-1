@@ -20,9 +20,7 @@ int negamax(state_t node,int depth,bool color){
         }
 		
 	}
-
 	score = MININT;
-
 	for (int i = 4; i < 36;i++){
         if (node.is_free(i)){
     		if (node.outflank(color,i)){
@@ -32,38 +30,42 @@ int negamax(state_t node,int depth,bool color){
                 score = MAX(score,-val);
             }
         }
-        if ((!moved) && (i == 35)){
-            val = negamax(node,depth,not(color));
-            score = MAX(score,-val);
-        }
 	}
-
+    if(!moved){
+        val = negamax(node,depth,not(color));
+        score = MAX(score,-val);
+    }
 	return score;
 }
 
 int main(int argc, const char **argv) {
     bool player = 0;
     state_t state;
-    cout << state << endl;
-    cout << "Principal variation:" << endl;
-    for( int i = 0; PV[i] != 30 ; ++i ) {
-        player = i % 2 == 0; // black moves first!
-        int pos = PV[i];
-        cout << state;
-        cout << (player ? "Black" : "White")
-             << " moves at pos = " << pos << (pos == 36 ? " (pass)" : "")
-             << endl;
-        state = state.move(player, pos);
-        cout << "Board after " << i+1 << (i == 0 ? " ply:" : " plies:") << endl;
-    }
-    cout << "Estado de entrada al negamax : \n";
-    cout << state;
-    // cout << "Value of the game = " << state.value() << endl;
-    // cout << "#bits per state = " << sizeof(state) * 8 << endl;
+    static int PV2[] = {
+        12, 21, 26, 13, 22, 18,  7,  6,  5, 27, 33, 23, 17, 11, 19, 15, 14,
+        31, 20, 32, 30, 10, 25, 24, 34, 28, 16,  4, 29, 35, 36,  8,  9 , -1
+    };
+    //cout << state << endl;
+    //cout << "Principal variation:" << endl;
+    for(int j=33; j>0;j--){
+        state = state_t();
+        for( int i = 0; PV[i] != PV2[j]; ++i ) {
+            player = i % 2 == 0; // black moves first!
+            int pos = PV[i];
+            //cout << state;
+            //cout << (player ? "Black" : "White")
+            //     << " moves at pos = " << pos << (pos == 36 ? " (pass)" : "")
+            //     << endl;
+            state = state.move(player, pos);
+            //cout << "Board after " << i+1 << (i == 0 ? " ply:" : " plies:") << endl;
+        }
+        //cout << "Estado de entrada al negamaxAB : \n";
+        //cout << state;
 
-    int valor = 0;
-    valor = negamax(state,MAXINT, not(player));
-    cout << "Value of the game = " << valor << endl;
+        int valor = 0;
+        valor =  negamax(state,MAXINT, not(player));
+        cout << "Value of the game = " << valor << " " <<  33-j << endl;
+    }
 
     if( argc > 1 ) {
         int n = atoi(argv[1]);
