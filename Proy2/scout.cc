@@ -28,13 +28,16 @@ bool test(state_t node,int depth,int value,bool color){ // sign 1 == >. sign 0 =
             }
         }
         if ((!moved) && (i == 35)){
-            return test(node,depth-1,value,not(color));
+            if ((color == 1) && (test(node,depth-1,value,not(color))))
+                return true;
+            if ((color == 0) && !(test(node,depth-1,value,not(color))))
+                return false;
         }
     }
     if (color == 1)
         return false;
     else
-        return true;  
+        return true; 
 }
 
 int scout(state_t node,int depth,bool color){
@@ -85,7 +88,7 @@ int main(int argc, const char **argv) {
     state_t state;
     cout << state << endl;
     cout << "Principal variation:" << endl;
-    for( int i = 0; PV[i] != 15 ; ++i ) {
+    for( int i = 0; PV[i] != 24 ; ++i ) {
         player = i % 2 == 0; // black moves first!
         int pos = PV[i];
         cout << state;
