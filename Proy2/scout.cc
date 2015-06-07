@@ -22,6 +22,7 @@ bool test(state_t node,int depth,int value,bool color){ // sign 1 == >. sign 0 =
     bool moved = false;
 
     if ((depth == 0) || (node.terminal())){
+        nodes_goals++;
         return node.value() > value;
     }
 
@@ -30,7 +31,7 @@ bool test(state_t node,int depth,int value,bool color){ // sign 1 == >. sign 0 =
             if (node.outflank(color,i)){
                 child = node.move(color,i);
                 moved = true;
-                nodes_generated+=1;
+                nodes_generated++;
                 if ((color == 1) && (test(child,depth-1,value,not(color)))){
                     return true;
                 }
@@ -41,7 +42,7 @@ bool test(state_t node,int depth,int value,bool color){ // sign 1 == >. sign 0 =
         }
     }
     if (!moved){
-        nodes_generated+=1;
+        nodes_generated++;
         if ((color == 1) && (test(node,depth-1,value,not(color)))){
             return true;
         }
@@ -62,6 +63,7 @@ int scout(state_t node,int depth,bool color){
     bool moved = false;
 
     if ((depth == 0) || (node.terminal())){
+        nodes_goals++;
         return node.value();
     }
 
@@ -71,14 +73,13 @@ int scout(state_t node,int depth,bool color){
         if (node.is_free(i)){
             if (node.outflank(color,i)){
                 child = node.move(color,i);
+                nodes_generated++;
                 if (firstChild){
-                    //nodes_generated+=1;
                     score = scout(child,depth-1,not(color));
                     firstChild = false;
                     moved = true;
                 }
                 else{
-                    nodes_generated+=1;
                     if ((color == 1) && (test(child,depth-1,score,not(color)))){
                         score = scout(child,depth-1,not(color));
                         moved = true;
@@ -92,7 +93,7 @@ int scout(state_t node,int depth,bool color){
         }
     }
     if (!moved){
-        //nodes_generated+=1;
+        nodes_generated++;
         score = scout(node,depth-1,not(color));
     }
     return score;
