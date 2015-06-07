@@ -31,22 +31,20 @@ int negascout(state_t node,int depth, int alpha, int beta,bool color){
     }
 
     score = 0;
-    for (int i = 1; i < 36;i++){
+    for (int i = 4; i < 36;i++){
         if (node.is_free(i)){
             if (node.outflank(color,i)){
                 child = node.move(color,i);
+                nodes_generated++;
                 if (firstChild){
-                    nodes_generated++;
                     score = -negascout(child,depth-1,-beta,-alpha,!color);
                     firstChild = false;
                     moved = true;
                 }
                 else{
-                    nodes_generated++;
                     score = -negascout(child,depth-1,-alpha-1,-alpha,!color);
                     moved = true;
                     if ((alpha < score) && (score < beta)){
-                        nodes_generated++;
                         score = -negascout(child,depth-1,-beta,-score,!color);
                     }
                 }
