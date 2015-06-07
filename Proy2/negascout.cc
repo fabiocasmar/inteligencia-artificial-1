@@ -44,21 +44,21 @@ int negascout(state_t node,int depth, int alpha, int beta,bool color){
                 }
             }
         }
-        if (!moved && (i==35)){
+        if (!(moved) && (i==35)){
             if (firstChild){
-                    score = -negascout(node,depth-1,-beta,-alpha,not(color));
+                score = -negascout(node,depth-1,-beta,-alpha,not(color));
+            }
+            else{
+                score = -negascout(node,depth-1,-alpha - 1,-alpha,not(color));
+                if ((alpha < score) && (score < beta)){
+                    score = -negascout(node,depth-1,-beta,-score,not(color));
                 }
-                else{
-                    score = -negascout(node,depth-1,-alpha - 1,-alpha,not(color));
-                    if ((alpha < score) && (score < beta)){
-                        score = -negascout(node,depth-1,-beta,-score,not(color));
-                    }
-                }
+            }
 
-                alpha = MAX(alpha, score);
-                if (alpha >= beta){
-                    break;
-                }
+            alpha = MAX(alpha, score);
+            if (alpha >= beta){
+                break;
+            }
         }
     }
     return alpha;
@@ -72,7 +72,7 @@ int main(int argc, const char **argv) {
     state_t state;
     cout << state << endl;
     cout << "Principal variation:" << endl;
-    for( int i = 0; PV[i] != 25 ; ++i ) {
+    for( int i = 0; PV[i] != 25; ++i ) {
         player = i % 2 == 0; // black moves first!
         int pos = PV[i];
         //cout << state;
