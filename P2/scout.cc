@@ -22,6 +22,7 @@ bool test(state_t node,int depth,int value,bool color){ // sign 1 == >. sign 0 =
     bool moved = false;
 
     if ((depth == 0) || (node.terminal())){
+        nodes_goals++;
         return node.value() > value;
     }
 
@@ -62,6 +63,7 @@ int scout(state_t node,int depth,bool color){
     bool moved = false;
 
     if ((depth == 0) || (node.terminal())){
+        nodes_goals++;
         return node.value();
     }
 
@@ -72,7 +74,7 @@ int scout(state_t node,int depth,bool color){
             if (node.outflank(color,i)){
                 child = node.move(color,i);
                 if (firstChild){
-                    //nodes_generated+=1;
+                    nodes_generated+=1;
                     score = scout(child,depth-1,not(color));
                     firstChild = false;
                     moved = true;
@@ -92,7 +94,7 @@ int scout(state_t node,int depth,bool color){
         }
     }
     if (!moved){
-        //nodes_generated+=1;
+        nodes_generated+=1;
         score = scout(node,depth-1,not(color));
     }
     return score;
