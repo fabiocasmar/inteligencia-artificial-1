@@ -6,18 +6,18 @@ include "alldifferent.mzn";
 array[0..5,0..9] of var 1..12: tab; % Tablero de juego
 
 % Figuras
-array[0..4] of var 1: f1;
-array[0..4] of var 2: f2;
-array[0..4] of var 3: f3;
-array[0..4] of var 4: f4;
-array[0..4] of var 5: f5;
-array[0..4] of var 6: f6;
-array[0..4] of var 7: f7;
-array[0..4] of var 8: f8;
-array[0..4] of var 9: f9;
-array[0..4] of var 10: f10;
-array[0..4] of var 11: f11;
-array[0..4] of var 12: f12;
+array[0..4] of var 1..1: f1;
+array[0..4] of var 2..2: f2;
+array[0..4] of var 3..3: f3;
+array[0..4] of var 4..4: f4;
+array[0..4] of var 5..5: f5;
+array[0..4] of var 6..6: f6;
+array[0..4] of var 7..7: f7;
+array[0..4] of var 8..8: f8;
+array[0..4] of var 9..9: f9;
+array[0..4] of var 10..10: f10;
+array[0..4] of var 11..11: f11;
+array[0..4] of var 12..12: f12;
 var int: i1;
 var int: i2; 
 var int: i3;
@@ -52,7 +52,7 @@ constraint  ((f2[0]=tab[i2+1,j2])/\(f2[1]=tab[i2+2,j2])/\(f2[2]=tab[i2+3,j2])/\(
 			((f2[0]=tab[i2,j2+1])/\(f2[1]=tab[i2,j2+2])/\(f2[2]=tab[i2,j2+3])/\(f2[3]=tab[i2,j2+4])/\(f2[4]=tab[i2,j2]));
 
 constraint  ((f3[0]=tab[i3,j3])/\(f3[1]=tab[i3+1,j3])/\(f3[2]=tab[i3+2,j3])/\(f3[3]=tab[i3+3,j3])/\(f3[4]=tab[i3+3,j3+1]))\/
-			((f3[0]=tab[i3,j3])/\(f3[1]=tab[i3+1,j3])/\(f3[2]=tab[i3+2,j3])/\(f3[3]=tab[i3+3,j3])/\(f3[4]=tab[i3,j3-1])\/
+			((f3[0]=tab[i3,j3])/\(f3[1]=tab[i3+1,j3])/\(f3[2]=tab[i3+2,j3])/\(f3[3]=tab[i3+3,j3])/\(f3[4]=tab[i3,j3-1]))\/
 			((f3[0]=tab[i3,j3])/\(f3[1]=tab[i3,j3+1])/\(f3[2]=tab[i3,j3+2])/\(f3[3]=tab[i3,j3+3])/\(f3[4]=tab[i3-1,j3+3]))\/
 			((f3[0]=tab[i3,j3])/\(f3[1]=tab[i3,j3+1])/\(f3[2]=tab[i3,j3+2])/\(f3[3]=tab[i3,j3+3])/\(f3[4]=tab[i3+1,j3]));
 
@@ -93,10 +93,25 @@ constraint  ((f11[0]=tab[i11,j11])/\(f11[1]=tab[i11+1,j11])/\(f11[2]=tab[i11+2,j
 			((f11[0]=tab[i11,j11])/\(f11[1]=tab[i11,j11+1])/\(f11[2]=tab[i11,j11+2])/\(f11[3]=tab[i11,j11+3])/\(f11[4]=tab[i11-1,j11+2]))\/
 			((f11[0]=tab[i11,j11])/\(f11[1]=tab[i11,j11+1])/\(f11[2]=tab[i11,j11+2])/\(f11[3]=tab[i11,j11+3])/\(f11[4]=tab[i11+1,j11+1]));
 
-constraint  ((f12[0]=tab[i12,j12])/\(f12[1]=tab[i12,j12+1])/\(f12[2]=tab[i12,j12+2])/\(f12[3]=tab[i12-1,j12+2])/\(f12[4]=tab[i12+1,j12]))\/
-			((f12[0]=tab[i12,j12])/\(f12[1]=tab[i12+1,j12])/\(f12[2]=tab[i12+2,j12])/\(f12[3]=tab[i12+2,j12-1])/\(f12[4]=tab[i12,j12+1]));
+constraint  (((f12[0]=tab[i12,j12])/\(f12[1]=tab[i12,j12+1])/\(f12[2]=tab[i12,j12+2])/\(f12[3]=tab[i12-1,j12+2])/\(f12[4]=tab[i12+1,j12]))\/
+			((f12[0]=tab[i12,j12])/\(f12[1]=tab[i12+1,j12])/\(f12[2]=tab[i12+2,j12])/\(f12[3]=tab[i12+2,j12-1])/\(f12[4]=tab[i12,j12+1])));
+
+% constraint aux = (f1++f2);
 
 
-constraint tab[i1,j1]!=tab[i2,j2]!=tab[i3,j3]!=tab[i4,j4]!=tab[i5,j5]!=tab[i6,j6]!=tab[i7,j7]!=tab[i8,j8]!=tab[i9,j9]!=tab[i10,j10]!=tab[i11,j11]!=tab[i12,j12];
+% constraint tab[i1,j1]!=tab[i2,j2];
+% constraint tab[i2,j2]!=tab[i3,j3];
+% constraint tab[i3,j3]!=tab[i4,j4];
+% constraint tab[i4,j4]!=tab[i5,j5];
+% constraint tab[i5,j5]!=tab[i6,j6];
+% constraint tab[i6,j6]!=tab[i7,j7];
+% constraint tab[i7,j7]!=tab[i8,j8];
+% constraint tab[i8,j8]!=tab[i9,j9];
+% constraint tab[i9,j9]!=tab[i10,j10];
+% constraint tab[i10,j10]!=tab[i11,j11];
+% constraint tab[i11,j11]!=tab[i12,j12];
+
+% constraint alldifferent ([ aux[i] | i in 0..30]);
 
 solve satisfy;
+output[ show_int(1,tab[i,j]) | i in 0..5,j in 0..9];
