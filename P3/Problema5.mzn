@@ -99,17 +99,17 @@ constraint  (((f12[0]=tab[i12,j12])/\(f12[1]=tab[i12,j12+1])/\(f12[2]=tab[i12,j1
 % constraint aux = (f1++f2);
 
 
-% constraint tab[i1,j1]!=tab[i2,j2];
-% constraint tab[i2,j2]!=tab[i3,j3];
-% constraint tab[i3,j3]!=tab[i4,j4];
-% constraint tab[i4,j4]!=tab[i5,j5];
-% constraint tab[i5,j5]!=tab[i6,j6];
-% constraint tab[i6,j6]!=tab[i7,j7];
-% constraint tab[i7,j7]!=tab[i8,j8];
-% constraint tab[i8,j8]!=tab[i9,j9];
-% constraint tab[i9,j9]!=tab[i10,j10];
-% constraint tab[i10,j10]!=tab[i11,j11];
-% constraint tab[i11,j11]!=tab[i12,j12];
+constraint tab[i1,j1]!=tab[i2,j2];
+constraint tab[i2,j2]!=tab[i3,j3];
+constraint tab[i3,j3]!=tab[i4,j4];
+constraint tab[i4,j4]!=tab[i5,j5];
+constraint tab[i5,j5]!=tab[i6,j6];
+constraint tab[i6,j6]!=tab[i7,j7];
+constraint tab[i7,j7]!=tab[i8,j8];
+constraint tab[i8,j8]!=tab[i9,j9];
+constraint tab[i9,j9]!=tab[i10,j10];
+constraint tab[i10,j10]!=tab[i11,j11];
+constraint tab[i11,j11]!=tab[i12,j12];
 
 % constraint alldifferent ([ aux[i] | i in 0..30]);
 
