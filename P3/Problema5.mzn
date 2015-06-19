@@ -3,7 +3,8 @@ include "alldifferent.mzn";
 % Problema 5 del Proyecto 3 de Inteligencia Artificial
 
 
-array[0..5,0..9] of var 1..12: tab; % Tablero de juego
+array[0..3,0..19] of var 1..12: tab; % Tablero de juego
+array[0..12] of var int: a1;
 
 % Figuras
 array[0..4] of var 1..1: f1;
@@ -42,7 +43,6 @@ var int: j9;
 var int: j10;
 var int: j11;
 var int: j12;
-
 constraint  ((f1[0]=tab[i1,j1])/\(f1[1]=tab[i1-1,j1])/\(f1[2]=tab[i1-1,j1+1])/\(f1[3]=tab[i1+1,j1])/\(f1[4]=tab[i1,j1-1]))\/
 			((f1[0]=tab[i1,j1])/\(f1[1]=tab[i1+1,j1])/\(f1[2]=tab[i1+1,j1-1])/\(f1[3]=tab[i1-1,j1])/\(f1[4]=tab[i1,j1+1]))\/
 			((f1[0]=tab[i1,j1])/\(f1[1]=tab[i1,j1-1])/\(f1[2]=tab[i1-1,j1-1])/\(f1[3]=tab[i1,j1+1])/\(f1[4]=tab[i1+1,j1]))\/
@@ -96,22 +96,20 @@ constraint  ((f11[0]=tab[i11,j11])/\(f11[1]=tab[i11+1,j11])/\(f11[2]=tab[i11+2,j
 constraint  (((f12[0]=tab[i12,j12])/\(f12[1]=tab[i12,j12+1])/\(f12[2]=tab[i12,j12+2])/\(f12[3]=tab[i12-1,j12+2])/\(f12[4]=tab[i12+1,j12]))\/
 			((f12[0]=tab[i12,j12])/\(f12[1]=tab[i12+1,j12])/\(f12[2]=tab[i12+2,j12])/\(f12[3]=tab[i12+2,j12-1])/\(f12[4]=tab[i12,j12+1])));
 
-% constraint aux = (f1++f2);
+constraint a1[0] = f1[0];
+constraint a1[1] = f2[0];
+constraint a1[2] = f3[0];
+constraint a1[3] = f4[0];
+constraint a1[4] = f5[0];
+constraint a1[5] = f6[0];
+constraint a1[6] = f7[0];
+constraint a1[7] = f8[0];
+constraint a1[8] = f9[0];
+constraint a1[9] = f10[0];
+constraint a1[10] = f11[0];
+constraint a1[11] = f12[0];
 
-
-constraint tab[i1,j1]!=tab[i2,j2];
-constraint tab[i2,j2]!=tab[i3,j3];
-constraint tab[i3,j3]!=tab[i4,j4];
-constraint tab[i4,j4]!=tab[i5,j5];
-constraint tab[i5,j5]!=tab[i6,j6];
-constraint tab[i6,j6]!=tab[i7,j7];
-constraint tab[i7,j7]!=tab[i8,j8];
-constraint tab[i8,j8]!=tab[i9,j9];
-constraint tab[i9,j9]!=tab[i10,j10];
-constraint tab[i10,j10]!=tab[i11,j11];
-constraint tab[i11,j11]!=tab[i12,j12];
-
-% constraint alldifferent ([ aux[i] | i in 0..30]);
+constraint (alldifferent([a1[i] |i in 0..12]));
 
 solve satisfy;
 output[ show_int(1,tab[i,j]) | i in 0..5,j in 0..9];
