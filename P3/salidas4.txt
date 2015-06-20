@@ -1,0 +1,79 @@
+-> Caso (m,3,6)
+m = 1 
+=====UNSATISFIABLE=====
+Finished in 18msec
+
+m = 2
+=====UNSATISFIABLE=====
+Finished in 19msec
+
+m = 3
+1 1 0 1 1 1 
+1 1 1 0 1 1 
+1 1 1 1 0 1
+Finished in 15msec
+
+-> Caso (m,4,6)
+m = 1
+1 1 1 1 1 1
+Finished in 18msec
+
+-> Caso (m,3,8)
+m = 1
+=====UNSATISFIABLE=====
+Finished in 13msec
+
+m = 2
+=====UNSATISFIABLE=====
+Finished in 16msec
+
+m = 3
+=====UNSATISFIABLE=====
+Finished in 19msec
+
+m = 4
+=====UNSATISFIABLE=====
+Finished in 34msec
+
+m = 5 
+=====UNSATISFIABLE=====
+Finished in 370msec
+
+m = 6
+1 1 0 0 1 1 0 1 
+1 0 1 0 0 1 1 1 
+1 1 0 0 1 0 1 1 
+1 0 0 1 0 1 1 1 
+1 0 1 1 1 0 0 1 
+1 1 1 1 0 0 0 1 
+Finished in 47msec
+
+-> Caso (m,4,8)
+m = 1
+=====UNSATISFIABLE=====
+Finished in 13msec
+
+m = 2
+=====UNSATISFIABLE=====
+Finished in 14msec
+
+m = 3
+1 0 0 1 1 1 1 1 
+1 1 1 0 0 1 1 1 
+1 1 1 1 1 0 0 1 
+Finished in 21msec
+
+-> Caso (m,5,8)
+m = 1
+=====UNSATISFIABLE=====
+Finished in 20msec
+
+m = 2
+=====UNSATISFIABLE=====
+Finished in 19msec
+
+m = 3
+1 1 1 1 0 1 1 1 
+1 1 1 1 1 0 1 1 
+1 1 1 1 1 1 0 1 
+Finished in 20msec
