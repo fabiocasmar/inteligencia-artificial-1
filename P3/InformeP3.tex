@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\title{}
+\author{}
+\date{}
+\pdfinfo{%
+  /Title    (Inteligencia Artificial I - Proyecto II)
+  /Author   (Fabio Castro, Maria Jorge, Jorge Marcano)
+  /Creator  ()
+  /Producer ()
+  /Subject  ()
+  /Keywords ()
+}
+\begin{document}
+
+
+
+
+ 
+\title{\Huge Inteligencia Artificial I-Proyecto III }
+
+
+
+\author{Fabio Castro 10-10132, María Jorge 11-10495, Jorge Marcano 11-10566} 
+
+
+
+\date{22/06/2015}
+
+\maketitle
+
+\section{Introducción}
+\hspace{0.5cm}
+
+\section{Ejercicios}
+\hspace{0.5cm}
+\subsection{Ejercicio 1}
+
+\subsection{Ejercicio 2}
+
+
+Para la implementacion de este ejercicio, decidimos representar el tablero como una matriz de tamano 7x7 de numeros enteros
+entre el 1 y el 7. \par
+
+
+Sobre este tablero, aplicamos las restricciones de que las columnas sean todas distintas entre si, y lo mismo
+para las filas. Para hacer esto, utilizamos la funcion alldifferent, la cual, dado un arreglo y un rango de sus
+elementos,se garantiza que los elementos dentro de ese rango seran distintos entre si. \par
+
+
+Para aplicar las restricciones sobre los 7 caminos, creamos 7 arreglos de enteros entre 1 y 7 que representan los caminos, y
+verificamos que cada miembro de cada camino sea igual a su posicion en el tablero original, y colocamos otras restricciones
+adicionales usando alldifferent para asegurarnos que los elementos de cada camino sean distintos entre si. \par
+
+
+Al correr el programa con dichas restricciones, obtuvimos el siguiente resultado : \par
+
+
+(COLOCAR RESULTADO AQUI) \par
+
+\subsection{Ejercicio 3}
+\subsection{Ejercicio 4}
+\subsection{Ejercicio 5}
+
+
+En este ejercicio decidimos representar el tablero de juego como una matriz de dimensiones NxM (donde N y M eran la cantidad de filas y columnas indicadas en el enunciado respectivamente). Adicionalmente, representamos cada una de las 12 piezas como otra matriz de dimensiones 5x5, en donde las posiciones correspondientes a la pieza estaban marcadas con un numero del 1 al 12 segun cual pieza fuera, y el resto con 0. \par
+
+
+Por medio de restricciones, nos aseguramos de que cada pieza se encuentre en una posicion valida, tomando en cuenta como validas, las rotaciones de 90,180 y 270 grados de la pieza original, y las mismas rotaciones,para la reflexion de la misma pieza. \par
+
+
+Por ultimo, revisamos que ninguna de las piezas colocadas en el tablero se solape con otras. \par
+
+
+Al ejecutarlo obtuvimos los siguientes resultados : \par
+
+
+(RESULTADOS AQUI, Y/O JUSTIFICACION SOBRE POR QUE NO NOS DIO Y LO QUE LOGRAMOS HACER).\par
+
+
+\clearpage
+
+\section{Conclusiones}
+\hspace{0.5cm}
+
+\bibliographystyle{plain}
+\bibliography{Referencias}
+
+
+\end{document}

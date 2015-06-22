@@ -23,7 +23,7 @@ int negascout(state_t node,int depth, int alpha, int beta,bool color){
     bool moved = false;
 
     if ((depth == 0) || (node.terminal())){
-        nodes_goals+=1;
+        nodes_goals++;
         if (color==0) {
             return -(node.value());
         }
