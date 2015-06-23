@@ -7,7 +7,6 @@ set of int: rangoj = 0..9;
 
 array[rangoi,rangoj] of var 1..12: tab; % Tablero de juego
 array[0..12] of var int: a1;
-% array[0..2] of var int: a2;
 
 % Figuras
 array[0..4] of var 1..1: f1;
@@ -155,10 +154,6 @@ constraint a1[9] = tab[i10,j10];
 constraint a1[10] = tab[i11,j11];
 constraint a1[11] = tab[i12,j12];
 
-% constraint a2[0] = tab[i4,j4];
-% constraint a2[1] = tab[i5,j5];
-% constraint a2[2] =tab[i7,j7];
-% constraint (alldifferent([a2[i] |i in 0..2]));
 constraint (alldifferent([a1[i] |i in 0..12]));
 
 solve satisfy;
