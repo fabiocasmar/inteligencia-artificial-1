@@ -60,59 +60,87 @@ constraint forall(i in 0..4) (f10[i] = 10);
 constraint forall(i in 0..4) (f11[i] = 11);
 constraint forall(i in 0..4) (f12[i] = 12);
 
-constraint  exists(i in rangoi,j in rangoj)(((f1[0]=tab[i,j])/\(f1[1]=tab[i-1,j])/\(f1[2]=tab[i-1,j+1])/\(f1[3]=tab[i+1,j])/\(f1[4]=tab[i,j-1]))\/
+constraint  exists(i in rangoi,j in rangoj)((
+			((f1[0]=tab[i,j])/\(f1[1]=tab[i-1,j])/\(f1[2]=tab[i-1,j+1])/\(f1[3]=tab[i+1,j])/\(f1[4]=tab[i,j-1]))\/
 			((f1[0]=tab[i,j])/\(f1[1]=tab[i+1,j])/\(f1[2]=tab[i+1,j-1])/\(f1[3]=tab[i-1,j])/\(f1[4]=tab[i,j+1]))\/
 			((f1[0]=tab[i,j])/\(f1[1]=tab[i,j-1])/\(f1[2]=tab[i-1,j-1])/\(f1[3]=tab[i,j+1])/\(f1[4]=tab[i+1,j]))\/
-			((f1[0]=tab[i,j])/\(f1[1]=tab[i,j+1])/\(f1[2]=tab[i+1,j+1])/\(f1[3]=tab[i,j-1])/\(f1[4]=tab[i-1,j]))/\(i1=i)/\(j1=j));
+			((f1[0]=tab[i,j])/\(f1[1]=tab[i,j+1])/\(f1[2]=tab[i+1,j+1])/\(f1[3]=tab[i,j-1])/\(f1[4]=tab[i-1,j]))\/
+			((f1[0]=tab[i,j])/\(f1[1]=tab[i-1,j])/\(f1[2]=tab[i,j+1])/\(f1[3]=tab[i+1,j])/\(f1[4]=tab[i-1,j-1]))\/
+			((f1[0]=tab[i,j])/\(f1[1]=tab[i+1,j])/\(f1[2]=tab[i,j-1])/\(f1[3]=tab[i-1,j])/\(f1[4]=tab[i+1,j+1]))\/
+			((f1[0]=tab[i,j])/\(f1[1]=tab[i,j-1])/\(f1[2]=tab[i-1,j])/\(f1[3]=tab[i,j+1])/\(f1[4]=tab[i+1,j-1]))\/
+			((f1[0]=tab[i,j])/\(f1[1]=tab[i,j+1])/\(f1[2]=tab[i+1,j])/\(f1[3]=tab[i,j-1])/\(f1[4]=tab[i-1,j+1])))/\(i1=i)/\(j1=j));
 
-constraint  exists(i in rangoi,j in rangoj) (((tab[i+1,j]=f2[0])/\(tab[i+2,j]=f2[1])/\(tab[i+3,j]=f2[2])/\(tab[i+4,j]=f2[3])/\(tab[i,j]=f2[4]))\/
-			((tab[i,j]=f2[0])/\(tab[i,j+2]=f2[1])/\(tab[i,j+3]=f2[2])/\(tab[i,j+4]=f2[3])/\(tab[i,j]=f2[4]))/\ (i2 = i) /\ (j2 = j));
+constraint  exists(i in rangoi,j in rangoj) ((((tab[i+1,j]=f2[0])/\(tab[i+2,j]=f2[1])/\(tab[i+3,j]=f2[2])/\(tab[i+4,j]=f2[3])/\(tab[i,j]=f2[4]))\/
+			((tab[i,j]=f2[0])/\(tab[i,j+2]=f2[1])/\(tab[i,j+3]=f2[2])/\(tab[i,j+4]=f2[3])/\(tab[i,j]=f2[4])))/\ (i2 = i) /\ (j2 = j));
 
-constraint  exists(i in rangoi,j in rangoj)(((f3[0]=tab[i,j])/\(f3[1]=tab[i+1,j])/\(f3[2]=tab[i+2,j])/\(f3[3]=tab[i+3,j])/\(f3[4]=tab[i+3,j+1]))\/
+constraint  exists(i in rangoi,j in rangoj)(((
+			(f3[0]=tab[i,j])/\(f3[1]=tab[i+1,j])/\(f3[2]=tab[i+2,j])/\(f3[3]=tab[i+3,j])/\(f3[4]=tab[i+3,j+1]))\/
 			((f3[0]=tab[i,j])/\(f3[1]=tab[i+1,j])/\(f3[2]=tab[i+2,j])/\(f3[3]=tab[i+3,j])/\(f3[4]=tab[i,j-1]))\/
 			((f3[0]=tab[i,j])/\(f3[1]=tab[i,j+1])/\(f3[2]=tab[i,j+2])/\(f3[3]=tab[i,j+3])/\(f3[4]=tab[i-1,j+3]))\/
-			((f3[0]=tab[i,j])/\(f3[1]=tab[i,j+1])/\(f3[2]=tab[i,j+2])/\(f3[3]=tab[i,j+3])/\(f3[4]=tab[i+1,j]))/\(i3=i)/\(j3=j));
+			((f3[0]=tab[i,j])/\(f3[1]=tab[i,j+1])/\(f3[2]=tab[i,j+2])/\(f3[3]=tab[i,j+3])/\(f3[4]=tab[i+1,j]))\/
+			((f3[0]=tab[i,j])/\(f3[1]=tab[i+1,j])/\(f3[2]=tab[i+2,j])/\(f3[3]=tab[i+3,j])/\(f3[4]=tab[i+3,j-1]))\/
+			((f3[0]=tab[i,j])/\(f3[1]=tab[i+1,j])/\(f3[2]=tab[i+2,j])/\(f3[3]=tab[i+3,j])/\(f3[4]=tab[i,j+1]))\/
+			((f3[0]=tab[i,j])/\(f3[1]=tab[i,j+1])/\(f3[2]=tab[i,j+2])/\(f3[3]=tab[i,j+3])/\(f3[4]=tab[i+1,j+3]))\/
+			((f3[0]=tab[i,j])/\(f3[1]=tab[i,j+1])/\(f3[2]=tab[i,j+2])/\(f3[3]=tab[i,j+3])/\(f3[4]=tab[i-1,j])))/\(i3=i)/\(j3=j));
 
-constraint  exists(i in rangoi,j in rangoj)(((f4[0]=tab[i,j])/\(f4[1]=tab[i,j+1])/\(f4[2]=tab[i,j+2])/\(f4[3]=tab[i+1,j+2])/\(f4[4]=tab[i+1,j+3]))\/
+
+constraint  exists(i in rangoi,j in rangoj)((
+			((f4[0]=tab[i,j])/\(f4[1]=tab[i,j+1])/\(f4[2]=tab[i,j+2])/\(f4[3]=tab[i+1,j+2])/\(f4[4]=tab[i+1,j+3]))\/
 			((f4[0]=tab[i,j])/\(f4[1]=tab[i,j+1])/\(f4[2]=tab[i,j+2])/\(f4[3]=tab[i-1,j])/\(f4[4]=tab[i-1,j-1]))\/
 			((f4[0]=tab[i,j])/\(f4[1]=tab[i+1,j])/\(f4[2]=tab[i+2,j])/\(f4[3]=tab[i,j+1])/\(f4[4]=tab[i-1,j+1]))\/
-			((f4[0]=tab[i,j])/\(f4[1]=tab[i+1,j])/\(f4[2]=tab[i+2,j])/\(f4[3]=tab[i+2,j-1])/\(f4[4]=tab[i+3,j-1]))/\(i4=i)/\(j4=j));
+			((f4[0]=tab[i,j])/\(f4[1]=tab[i+1,j])/\(f4[2]=tab[i+2,j])/\(f4[3]=tab[i+2,j-1])/\(f4[4]=tab[i+3,j-1]))\/
+			((f4[0]=tab[i,j])/\(f4[1]=tab[i,j+1])/\(f4[2]=tab[i,j+2])/\(f4[3]=tab[i-1,j+2])/\(f4[4]=tab[i-1,j+3]))\/
+			((f4[0]=tab[i,j])/\(f4[1]=tab[i,j+1])/\(f4[2]=tab[i,j+2])/\(f4[3]=tab[i+1,j])/\(f4[4]=tab[i+1,j-1]))\/
+			((f4[0]=tab[i,j])/\(f4[1]=tab[i+1,j])/\(f4[2]=tab[i+2,j])/\(f4[3]=tab[i,j-1])/\(f4[4]=tab[i-1,j-1]))\/
+			((f4[0]=tab[i,j])/\(f4[1]=tab[i+1,j])/\(f4[2]=tab[i+2,j])/\(f4[3]=tab[i+2,j+1])/\(f4[4]=tab[i+3,j+1])))/\(i4=i)/\(j4=j));
 
-constraint  exists(i in rangoi,j in rangoj)(((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i-1,j+1]))\/
+constraint  exists(i in rangoi,j in rangoj)((((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i-1,j+1]))\/
 			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i,j-1]))\/
+			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i+2,j+1]))\/
+			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i-1,j]))\/
+			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i+1,j-1]))\/
+			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i,j+2]))\/
 			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i+2,j]))\/
-			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i+1,j+2]))/\(i5=i)/\(j5=j));
+			((f5[0]=tab[i,j])/\(f5[1]=tab[i,j+1])/\(f5[2]=tab[i+1,j])/\(f5[3]=tab[i+1,j+1])/\(f5[4]=tab[i+1,j+2])))/\(i5=i)/\(j5=j));
 
-constraint  exists(i in rangoi,j in rangoj)(((f6[0]=tab[i,j])/\(f6[1]=tab[i+1,j])/\(f6[2]=tab[i-1,j-1])/\(f6[3]=tab[i-1,j])/\(f6[4]=tab[i-1,j+1]))\/
+constraint  exists(i in rangoi,j in rangoj)((((f6[0]=tab[i,j])/\(f6[1]=tab[i+1,j])/\(f6[2]=tab[i-1,j-1])/\(f6[3]=tab[i-1,j])/\(f6[4]=tab[i-1,j+1]))\/
 			((f6[0]=tab[i,j])/\(f6[1]=tab[i+1,j])/\(f6[2]=tab[i+2,j-1])/\(f6[3]=tab[i+2,j])/\(f6[4]=tab[i+2,j+1]))\/
 			((f6[0]=tab[i,j])/\(f6[1]=tab[i,j+1])/\(f6[2]=tab[i-1,j+2])/\(f6[3]=tab[i,j+2])/\(f6[4]=tab[i+1,j+2]))\/
-			((f6[0]=tab[i,j])/\(f6[1]=tab[i,j+1])/\(f6[2]=tab[i-1,j-1])/\(f6[3]=tab[i,j-1])/\(f6[4]=tab[i+1,j-1]))/\(i6=i)/\(j6=j));
+			((f6[0]=tab[i,j])/\(f6[1]=tab[i,j+1])/\(f6[2]=tab[i-1,j-1])/\(f6[3]=tab[i,j-1])/\(f6[4]=tab[i+1,j-1])))/\(i6=i)/\(j6=j));
 
-constraint  exists(i in rangoi,j in rangoj)(((f7[0]=tab[i,j])/\(f7[1]=tab[i,j-1])/\(f7[2]=tab[i,j+1])/\(f7[3]=tab[i-1,j-1])/\(f7[4]=tab[i-1,j+1]))\/
+constraint  exists(i in rangoi,j in rangoj)((((f7[0]=tab[i,j])/\(f7[1]=tab[i,j-1])/\(f7[2]=tab[i,j+1])/\(f7[3]=tab[i-1,j-1])/\(f7[4]=tab[i-1,j+1]))\/
 			((f7[0]=tab[i,j])/\(f7[1]=tab[i,j-1])/\(f7[2]=tab[i,j+1])/\(f7[3]=tab[i+1,j-1])/\(f7[4]=tab[i+1,j+1]))\/
 			((f7[0]=tab[i,j])/\(f7[1]=tab[i-1,j])/\(f7[2]=tab[i+1,j])/\(f7[3]=tab[i-1,j+1])/\(f7[4]=tab[i+1,j+1]))\/
-			((f7[0]=tab[i,j])/\(f7[1]=tab[i-1,j])/\(f7[2]=tab[i+1,j])/\(f7[3]=tab[i-1,j-1])/\(f7[4]=tab[i+1,j-1]))/\(i7=i)/\(j7=j));
+			((f7[0]=tab[i,j])/\(f7[1]=tab[i-1,j])/\(f7[2]=tab[i+1,j])/\(f7[3]=tab[i-1,j-1])/\(f7[4]=tab[i+1,j-1])))/\(i7=i)/\(j7=j));
 
-constraint exists(i in rangoi,j in rangoj)( ((f8[0]=tab[i8,j8])/\(f8[1]=tab[i8-1,j8])/\(f8[2]=tab[i8+1,j8])/\(f8[3]=tab[i8-1,j8+1])/\(f8[4]=tab[i8-1,j8+2]))\/
+constraint exists(i in rangoi,j in rangoj)((((f8[0]=tab[i8,j8])/\(f8[1]=tab[i8-1,j8])/\(f8[2]=tab[i8+1,j8])/\(f8[3]=tab[i8-1,j8+1])/\(f8[4]=tab[i8-1,j8+2]))\/
 			((f8[0]=tab[i8,j8])/\(f8[1]=tab[i8-1,j8])/\(f8[2]=tab[i8+1,j8])/\(f8[3]=tab[i8+1,j8-2])/\(f8[4]=tab[i8+1,j8-1]))\/
 			((f8[0]=tab[i8,j8])/\(f8[1]=tab[i8-1,j8])/\(f8[2]=tab[i8+1,j8])/\(f8[3]=tab[i8-1,j8-2])/\(f8[4]=tab[i8-1,j8-1]))\/
-			((f8[0]=tab[i8,j8])/\(f8[1]=tab[i8-1,j8])/\(f8[2]=tab[i8+1,j8])/\(f8[3]=tab[i8+1,j8+1])/\(f8[4]=tab[i8+1,j8+2]))/\(i8=i)/\(j8=j));
+			((f8[0]=tab[i8,j8])/\(f8[1]=tab[i8-1,j8])/\(f8[2]=tab[i8+1,j8])/\(f8[3]=tab[i8+1,j8+1])/\(f8[4]=tab[i8+1,j8+2])))/\(i8=i)/\(j8=j));
 
-constraint exists(i in rangoi,j in rangoj)( ((f9[0]=tab[i,j])/\(f9[1]=tab[i+1,j])/\(f9[2]=tab[i+1,j+1])/\(f9[3]=tab[i+2,j+1])/\(f9[4]=tab[i+2,j+2]))\/
+constraint exists(i in rangoi,j in rangoj)((((f9[0]=tab[i,j])/\(f9[1]=tab[i+1,j])/\(f9[2]=tab[i+1,j+1])/\(f9[3]=tab[i+2,j+1])/\(f9[4]=tab[i+2,j+2]))\/
 			((f9[0]=tab[i,j])/\(f9[1]=tab[i+1,j])/\(f9[2]=tab[i+1,j-1])/\(f9[3]=tab[i+2,j-1])/\(f9[4]=tab[i+2,j-2]))\/
 			((f9[0]=tab[i,j])/\(f9[1]=tab[i,j-1])/\(f9[2]=tab[i+1,j-1])/\(f9[3]=tab[i+1,j-2])/\(f9[4]=tab[i+2,j-2]))\/
-			((f9[0]=tab[i,j])/\(f9[1]=tab[i,j+1])/\(f9[2]=tab[i+1,j+1])/\(f9[3]=tab[i+1,j+2])/\(f9[4]=tab[i+2,j+2]))/\(i9=i)/\(j9=j));
+			((f9[0]=tab[i,j])/\(f9[1]=tab[i,j+1])/\(f9[2]=tab[i+1,j+1])/\(f9[3]=tab[i+1,j+2])/\(f9[4]=tab[i+2,j+2])))/\(i9=i)/\(j9=j));
 
-constraint exists(i in rangoi,j in rangoj)(((f10[0]=tab[i,j])/\(f10[1]=tab[i-1,j])/\(f10[2]=tab[i+1,j])
-                  /\(f10[3]=tab[i,j-1])/\(f10[4]=tab[i,j+1]))/\(i10=i)/\(j10=j));
+constraint exists(i in rangoi,j in rangoj)((((f10[0]=tab[i,j])/\(f10[1]=tab[i-1,j])/\(f10[2]=tab[i+1,j])
+                  /\(f10[3]=tab[i,j-1])/\(f10[4]=tab[i,j+1])))/\(i10=i)/\(j10=j));
 
-constraint  exists(i in rangoi,j in rangoj)(((f11[0]=tab[i,j])/\(f11[1]=tab[i+1,j])/\(f11[2]=tab[i+2,j])/\(f11[3]=tab[i+3,j])/\(f11[4]=tab[i+1,j-1]))\/
+constraint  exists(i in rangoi,j in rangoj)(
+			(((f11[0]=tab[i,j])/\(f11[1]=tab[i+1,j])/\(f11[2]=tab[i+2,j])/\(f11[3]=tab[i+3,j])/\(f11[4]=tab[i+1,j-1]))\/
 			((f11[0]=tab[i,j])/\(f11[1]=tab[i+1,j])/\(f11[2]=tab[i+2,j])/\(f11[3]=tab[i+3,j])/\(f11[4]=tab[i+2,j+1]))\/
 			((f11[0]=tab[i,j])/\(f11[1]=tab[i,j+1])/\(f11[2]=tab[i,j+2])/\(f11[3]=tab[i,j+3])/\(f11[4]=tab[i-1,j+2]))\/
-			((f11[0]=tab[i,j])/\(f11[1]=tab[i,j+1])/\(f11[2]=tab[i,j+2])/\(f11[3]=tab[i,j+3])/\(f11[4]=tab[i+1,j+1]))/\(i11=i)/\(j11=j));
+			((f11[0]=tab[i,j])/\(f11[1]=tab[i,j+1])/\(f11[2]=tab[i,j+2])/\(f11[3]=tab[i,j+3])/\(f11[4]=tab[i+1,j+1]))\/
+			((f11[0]=tab[i,j])/\(f11[1]=tab[i+1,j])/\(f11[2]=tab[i+2,j])/\(f11[3]=tab[i+3,j])/\(f11[4]=tab[i+1,j+1]))\/
+			((f11[0]=tab[i,j])/\(f11[1]=tab[i+1,j])/\(f11[2]=tab[i+2,j])/\(f11[3]=tab[i+3,j])/\(f11[4]=tab[i+2,j-1]))\/
+			((f11[0]=tab[i,j])/\(f11[1]=tab[i,j+1])/\(f11[2]=tab[i,j+2])/\(f11[3]=tab[i,j+3])/\(f11[4]=tab[i+1,j+2]))\/
+			((f11[0]=tab[i,j])/\(f11[1]=tab[i,j+1])/\(f11[2]=tab[i,j+2])/\(f11[3]=tab[i,j+3])/\(f11[4]=tab[i-1,j+1])))/\(i11=i)/\(j11=j));
 
-constraint  exists(i in rangoi,j in rangoj)((((f12[0]=tab[i,j])/\(f12[1]=tab[i,j+1])/\(f12[2]=tab[i,j+2])/\(f12[3]=tab[i-1,j+2])/\(f12[4]=tab[i+1,j]))\/
-			((f12[0]=tab[i,j])/\(f12[1]=tab[i+1,j])/\(f12[2]=tab[i+2,j])/\(f12[3]=tab[i+2,j-1])/\(f12[4]=tab[i,j+1])))/\(i12=i)/\(j12=j));
+constraint  exists(i in rangoi,j in rangoj)(
+			(((f12[0]=tab[i,j])/\(f12[1]=tab[i,j+1])/\(f12[2]=tab[i,j+2])/\(f12[3]=tab[i-1,j+2])/\(f12[4]=tab[i+1,j]))\/
+			((f12[0]=tab[i,j])/\(f12[1]=tab[i+1,j])/\(f12[2]=tab[i+2,j])/\(f12[3]=tab[i+2,j-1])/\(f12[4]=tab[i,j+1]))\/
+			((f12[0]=tab[i,j])/\(f12[1]=tab[i,j+1])/\(f12[2]=tab[i,j+2])/\(f12[3]=tab[i+1,j+2])/\(f12[4]=tab[i-1,j]))\/
+			((f12[0]=tab[i,j])/\(f12[1]=tab[i+1,j])/\(f12[2]=tab[i+2,j])/\(f12[3]=tab[i+2,j+1])/\(f12[4]=tab[i,j-1])))/\(i12=i)/\(j12=j));
 
 constraint a1[0] = tab[i1,j1];
 constraint a1[1] = tab[i3,j2];
